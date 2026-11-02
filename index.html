@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Museu das Engenhocas — História 3º ano</title>
+<style>
+:root{
+  --pau:#C0392B; --pau2:#962d22; --mata:#2E8B57; --mata2:#216843;
+  --ouro:#E8A317; --ouro2:#b97f0c; --aq:#2F80C2; --aq2:#215f93;
+  --acervo:#FFF8EE; --tinta:#2b2a33; --cinza:#86828c; --linha:#efdcc0;
+  --ok:#1fa45b; --erro:#e0453a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Trebuchet MS","Segoe UI",Verdana,sans-serif;background:var(--acervo);color:var(--tinta);font-size:19px;line-height:1.55}
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+.frontao{height:20px;background:repeating-linear-gradient(90deg,var(--pau) 0 26px,var(--ouro) 26px 52px,var(--mata) 52px 78px,var(--aq) 78px 104px)}
+header.topo{background:linear-gradient(180deg,#fdebd3,#fff8ee);text-align:center;padding:14px 12px 10px}
+header.topo h1{margin:4px 0;font-size:1.8em;color:var(--pau2);letter-spacing:.5px}
+header.topo p{margin:2px 0;color:#5f5b66;font-size:.92em}
+.colunas{font-size:2.2em;letter-spacing:6px}
+.capi{display:inline-block;animation:pula 2.8s ease-in-out infinite}
+@keyframes pula{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+nav.abas{position:sticky;top:0;z-index:20;background:#fff;box-shadow:0 2px 8px #0001;display:flex;gap:6px;overflow-x:auto;padding:8px}
+nav.abas button{flex:0 0 auto;border:2px solid var(--linha);background:#fff;border-radius:14px;padding:8px 12px;font-weight:bold;color:var(--tinta);position:relative}
+nav.abas button.ativa{background:var(--mata);border-color:var(--mata2);color:#fff}
+nav.abas button.trancada{background:#eee;color:#999;border-color:#ddd}
+nav.abas button .selo{position:absolute;top:-8px;right:-6px;background:var(--ouro);color:#4a3200;border-radius:10px;font-size:.62em;padding:1px 6px}
+main{max-width:880px;margin:0 auto;padding:14px 12px 80px}
+section.aba{display:none}
+section.aba.ativa{display:block;animation:entra .35s ease}
+@keyframes entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:#fff;border-radius:18px;padding:16px 18px;margin:14px 0;box-shadow:0 3px 0 var(--linha),0 4px 14px #0000000d;border:2px solid var(--linha)}
+h2{color:var(--mata2);margin:.2em 0 .4em}
+h3{margin:.5em 0 .3em}
+.sub{color:var(--cinza);font-size:.88em}
+.btn{border:none;border-radius:14px;padding:10px 16px;font-weight:bold;color:#fff;background:var(--mata);box-shadow:0 3px 0 var(--mata2);margin:4px 2px}
+.btn:disabled{background:#c9c4cc;box-shadow:0 3px 0 #a9a3ad;cursor:not-allowed}
+.btn.azul{background:var(--aq);box-shadow:0 3px 0 var(--aq2)}
+.btn.loco{background:var(--pau);box-shadow:0 3px 0 var(--pau2)}
+.btn.claro{background:#fff;color:var(--tinta);border:2px solid var(--linha);box-shadow:none}
+.trilha{display:grid;gap:10px}
+.etapa{display:flex;gap:12px;align-items:center;border-radius:16px;padding:12px 14px;border:2px solid var(--linha);background:#fff;text-align:left;width:100%;color:var(--tinta)}
+.etapa .ic{font-size:1.8em}
+.etapa.trancada{background:#f1f0f2;color:#8d8892;filter:grayscale(1)}
+.etapa.feita{border-color:var(--ok)}
+.etapa.nova{animation:brilho 1.4s ease 3;border-color:var(--ouro)}
+@keyframes brilho{0%,100%{box-shadow:0 0 0 0 #e8a31700}50%{box-shadow:0 0 0 8px #e8a31788}}
+.tag{display:inline-block;border-radius:10px;padding:1px 8px;font-size:.75em;font-weight:bold;margin-left:4px}
+.tag.ok{background:#dff5e8;color:var(--ok)}
+.tag.novo{background:#fff1c2;color:#7a5600}
+.tag.lock{background:#e7e5ea;color:#6b6670}
+.barra{height:14px;background:#eee;border-radius:10px;overflow:hidden;margin:6px 0}
+.barra>div{height:100%;background:linear-gradient(90deg,var(--mata),var(--ouro));width:0;transition:width .4s}
+.ala-tit{margin:22px 0 4px;padding:10px 14px;border-radius:14px;color:#fff;font-weight:bold;font-size:1.1em;text-align:center}
+.ala-tit.verde{background:linear-gradient(90deg,var(--mata),#3BA37A)}
+.ala-tit.engenhocas{background:linear-gradient(90deg,#5B6CD9,var(--aq))}
+.ala-tit.final{background:linear-gradient(90deg,var(--pau),var(--ouro))}
+.bloco{border-left:10px solid var(--c,var(--mata))}
+.bloco.fechado .corpo{display:none}
+.bloco .cab{display:flex;justify-content:space-between;align-items:center;gap:8px;cursor:pointer}
+.bloco.trancado{opacity:.55}
+.bilhete{display:inline-block;background:#fff4c9;border:2px dashed var(--ouro2);border-radius:8px;padding:0 8px;font-size:.75em;font-weight:bold;color:#7a5600;transform:rotate(-4deg)}
+.caixa{background:#fff8e3;border:2px dashed var(--ouro);border-radius:12px;padding:8px 12px;margin:10px 0;font-size:.93em}
+.regra{background:#eef9f3;border:2px solid #bfe9d2;border-radius:12px;padding:8px 12px;margin:8px 0}
+.regra.azulado{background:#eef5fc;border-color:#c8def3}
+.duas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}
+.degraus{display:grid;gap:6px;margin:8px 0}
+.degraus>div{background:#fff7ec;border-left:6px solid var(--ouro);border-radius:10px;padding:6px 10px}
+.fluxo{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:8px 0}
+.fluxo>div{flex:1 1 180px;background:#fff7e1;border:2px solid #f1d38a;border-radius:12px;padding:8px 10px;font-size:.93em}
+.fluxo>span{font-size:1.3em}
+.etapas{background:#fdf0e8;border:2px solid #efc7ad;border-radius:12px;padding:8px 12px;margin:8px 0}
+.etapas ol{margin:4px 0 0 0;padding-left:22px}
+.narrador{background:#eef4ff;border-left:5px solid var(--aq);border-radius:10px;padding:8px 12px;margin:8px 0;font-style:italic}
+.pergunta{margin:14px 0 6px;padding-top:10px;border-top:2px dotted var(--linha)}
+.opcoes{display:grid;gap:6px}
+.op{text-align:left;border:2px solid var(--linha);background:#fff;border-radius:12px;padding:8px 12px;color:var(--tinta)}
+.op:hover:not(:disabled){border-color:var(--aq)}
+.op.certa{background:#e3f7ea;border-color:var(--ok);font-weight:bold}
+.op.errada{background:#fde6e4;border-color:var(--erro)}
+.op.cinza{background:#f2f1f3;color:#777}
+.op.sel{background:#e6efff;border-color:var(--aq);font-weight:bold}
+.op:disabled{cursor:default}
+.fb{border-radius:12px;padding:8px 12px;margin-top:6px;font-size:.93em;animation:entra .3s}
+.fb.ok{background:#e3f7ea}
+.fb.no{background:#fff0e0}
+.estrelas{font-size:1.2em}
+table.mini{border-collapse:collapse;margin:6px 0;font-size:.92em;width:100%}
+table.mini td,table.mini th{border:2px solid #ead9bd;padding:4px 8px;text-align:left}
+table.mini th{background:#fbefd9}
+/* mapa */
+.mapa .centro{background:var(--pau);color:#fff;text-align:center;border-radius:50px;padding:14px;font-weight:bold;font-size:1.15em;margin:6px auto 14px;max-width:460px;box-shadow:0 4px 0 var(--pau2)}
+.ramos{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.ramo{border-radius:16px;padding:10px 12px;background:#fff;border:3px solid var(--c);transition:filter .6s}
+.ramo h4{margin:0 0 6px;color:var(--c);font-size:1.05em}
+.mapa.incompleto .ramo{filter:saturate(.25)}
+.mapa.completo .ramo{animation:revela .8s ease}
+@keyframes revela{from{transform:scale(.96)}to{transform:none}}
+.no{margin:7px 0;font-size:.96em}
+.lacuna{display:inline-flex;gap:4px;vertical-align:middle;flex-wrap:wrap}
+.lacuna button{border:2px dashed var(--aq);background:#eef4ff;border-radius:10px;padding:2px 10px;font-weight:bold;color:var(--aq2)}
+.lacuna.feita span{display:inline-block;background:#e3f7ea;border:2px solid var(--ok);border-radius:10px;padding:2px 10px;font-weight:bold;color:var(--ok)}
+.lacuna button.erro{border-color:var(--erro);background:#fde6e4;color:var(--erro);animation:balanca .45s}
+@keyframes balanca{0%,100%{transform:none}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.contador{position:sticky;top:58px;z-index:5;background:var(--aq);color:#fff;border-radius:14px;padding:8px 12px;text-align:center;font-weight:bold;margin:8px 0}
+/* vf */
+.vf-frase{font-size:1.2em;font-weight:bold;text-align:center;margin:14px 0;min-height:3em}
+.vf-bts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.vf-bts .btn{font-size:1.1em;padding:12px 22px}
+/* resumo */
+.linha-tempo{display:grid;gap:8px;position:relative;padding-left:22px}
+.linha-tempo:before{content:"";position:absolute;left:8px;top:4px;bottom:4px;width:6px;border-radius:4px;background:repeating-linear-gradient(180deg,var(--pau) 0 12px,var(--ouro) 12px 24px)}
+.parada{display:flex;gap:10px;align-items:center;background:#fff;border:2px solid var(--linha);border-radius:14px;padding:6px 10px}
+.parada .ano{font-weight:bold;color:var(--pau2);min-width:88px}
+.parada .ic{font-size:1.4em}
+.grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.palavra{background:#fff;border:2px solid var(--linha);border-radius:12px;padding:8px 10px;font-size:.93em}
+.palavra b{color:var(--mata2)}
+.postits{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.postit{background:#fff59a;padding:12px;border-radius:4px;box-shadow:2px 3px 6px #0002;transform:rotate(-1deg);font-size:.95em}
+.postit:nth-child(even){transform:rotate(1.2deg);background:#ffe0ef}
+.relampago button{width:100%;text-align:left}
+.resp-oculta{display:none;margin:4px 0 8px 10px;color:var(--mata2);font-weight:bold}
+/* modal */
+.fundo-modal{position:fixed;inset:0;background:#2b2a33cc;display:none;align-items:center;justify-content:center;z-index:100;padding:16px}
+.fundo-modal.aberto{display:flex}
+.modal{background:#fff;border-radius:20px;max-width:440px;width:100%;padding:20px;text-align:center;animation:entra .3s}
+.painel-salvar{font-size:.85em;color:var(--cinza)}
+input.codigo{font-size:1em;padding:8px 10px;border-radius:12px;border:2px solid var(--linha);width:170px;text-transform:uppercase}
+table.rel{width:100%;border-collapse:collapse;font-size:.88em}
+table.rel td,table.rel th{border-bottom:1px solid #eee;padding:5px;text-align:left;vertical-align:top}
+.gab-q{border-top:2px dotted var(--linha);padding-top:8px;margin-top:10px}
+.gab-op{border-radius:10px;padding:5px 10px;margin:4px 0;font-size:.92em}
+.gab-op.certa{background:#e3f7ea;border:2px solid var(--ok)}
+.gab-op.cinza{background:#f2f1f3;color:#666}
+.gab-op.marcada{outline:3px solid var(--aq)}
+.placar-final{text-align:center;font-size:1.3em}
+.trofeu{font-size:3em}
+footer{text-align:center;color:var(--cinza);font-size:.85em;padding:20px}
+@media (max-width:520px){body{font-size:17px}header.topo h1{font-size:1.4em}}
+</style>
+</head>
+<body>
+<div class="frontao"></div>
+<header class="topo">
+  <div class="colunas">🏛️<span class="capi">🦫</span>🏺</div>
+  <h1>Museu das Engenhocas</h1>
+  <p><b>História · 3º ano</b> · Prova: sexta-feira, 06/11</p>
+  <p>Unidade 10: Os municípios e o meio ambiente · Unidade 11: O trabalho e a tecnologia</p>
+</header>
+<div class="frontao"></div>
+<nav class="abas" id="abas"></nav>
+<main>
+
+<!-- ============ INÍCIO ============ -->
+<section class="aba" id="sec-inicio">
+  <div class="card">
+    <h2>👋 Bem-vindo ao museu, jovem aprendiz!</h2>
+    <p>Eu sou a <b>Capi</b>, a capivara que cuida do <b>Museu das Engenhocas</b> 🦫. O museu tem duas alas. Na <b>Ala Verde</b>, você vai descobrir como as riquezas da natureza foram exploradas e como os municípios ganharam luz, água, esgoto e parques. Na <b>Ala das Engenhocas</b>, você vai conhecer as tecnologias do trabalho: do machado de pedra ao robô! Em cada sala visitada, você ganha um <span class="bilhete">🎟️ ingresso carimbado</span>.</p>
+  </div>
+  <div class="card">
+    <h2>📋 O que vai cair na prova</h2>
+    <ul>
+      <li><b>Unidade 10 – Os municípios e o meio ambiente</b> (livro p. 94 a 109, 112 a 114, 121 e 125): meio ambiente, pau-brasil, cana-de-açúcar, ouro e café, serviços públicos (luz, água, esgoto e lixo) e áreas de conservação.</li>
+      <li><b>Unidade 11 – O trabalho e a tecnologia</b> (p. 128 a 135, 138, 139, 141 a 143, 145 a 149, 151 a 153 e 155): o que é tecnologia, machado de mão, cerâmica, engenho, tecnologia no campo, mineração com técnicas africanas e a cidade com eletricidade.</li>
+      <li>📒 Estude também as <b>atividades do caderno</b> dessas unidades.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>🛤️ Seu roteiro no museu</h2>
+    <p class="sub">Os materiais abrem um por vez, na ordem. Conclua um para destravar o próximo.</p>
+    <div class="trilha" id="trilhaCards"></div>
+  </div>
+  <div class="card">
+    <h2>🧭 Como usar</h2>
+    <ol>
+      <li>Os materiais abrem <b>um por vez, na ordem</b>. Conclua um para destravar o próximo.</li>
+      <li>Leia cada sala com calma <b>antes</b> de responder. A resposta sempre está no texto.</li>
+      <li>Errou? Tudo bem! Leia a explicação e siga o passeio. Errar aqui é treino.</li>
+      <li>Depois de terminar tudo, os materiais ficam abertos para revisar quantas vezes quiser.</li>
+    </ol>
+  </div>
+  <div class="card">
+    <h2>💾 Seu progresso</h2>
+    <p class="painel-salvar" id="painelSalvar">Seu progresso é salvo sozinho neste aparelho.</p>
+    <button class="btn claro" id="btExportar">📥 Exportar</button>
+    <button class="btn claro" id="btImportar">📤 Importar</button>
+    <button class="btn claro" id="btZerar">🗑️ Zerar tudo</button>
+    <input type="file" id="arqImportar" accept=".json,application/json" style="display:none">
+  </div>
+  <div class="card">
+    <h2>📊 Relatório para os pais</h2>
+    <p class="sub">Digite o código do Simulado (SIM-…) ou o código da família.</p>
+    <input class="codigo" id="codPais" placeholder="Código" autocomplete="off">
+    <button class="btn azul" id="btRelatorio">Abrir</button>
+    <div id="areaPais"></div>
+    <p class="sub" style="margin-top:10px">💡 <b>Dica para os pais:</b> o progresso fica no navegador deste aparelho. Se trocar de aparelho, use 📥 Exportar / 📤 Importar ou libere a trilha com o código da família.</p>
+  </div>
+</section>
+
+<!-- ============ LEITURA GUIADA ============ -->
+<section class="aba" id="sec-leitura">
+  <div class="card">
+    <h2>📖 Leitura Guiada — o passeio pelas salas</h2>
+    <p>Leia cada sala do museu e responda às <b>3 perguntas</b> do fim. A próxima sala abre quando você responder às 3. Clique no título de uma sala para fechar ou abrir.</p>
+    <div class="barra"><div id="barraLeitura"></div></div>
+    <p class="sub" id="txtLeitura"></p>
+  </div>
+  <div id="blocosLeitura"></div>
+  <div class="card" id="fimLeitura">
+    <h2>⚠️ Pegadinhas do museu</h2>
+    <ol>
+      <li>Meio ambiente <b>não é só natureza</b>: ruas, praças e lugares históricos também fazem parte.</li>
+      <li>Os <b>indígenas</b> tingiam <b>penas</b>; os <b>portugueses</b> queriam o corante para <b>tecidos</b>.</li>
+      <li><b>Monocultura</b> = um só produto. Não confunda com <b>biotecnologia</b> (tecnologia de hoje com seres vivos).</li>
+      <li>A ordem da luz: <b>velas → lampiões a óleo (1794) → lampiões a gás (1854) → elétrica (1883)</b>.</li>
+      <li><b>Termelétrica</b> queima carvão; <b>hidrelétrica</b> usa a força das águas.</li>
+      <li><b>Aqueduto</b> levava água limpa; o <b>esgoto</b> era carregado em barris por escravizados.</li>
+      <li>Primeiro tratamento de esgoto: <b>Ouro Preto</b>. Primeira limpeza urbana: <b>Rio de Janeiro</b> (1880).</li>
+      <li><b>Ferreiro</b> faz objetos de metal; <b>oleiro</b> faz cerâmica.</li>
+      <li>Engenho: <b>moenda</b> (moer, caldo) → <b>caldeiras</b> (cozinhar, melado) → <b>purgar</b> (secar, açúcar).</li>
+      <li>Os escravizados <b>"mina"</b> dominavam a <b>mineração</b>, não a agricultura. <b>Canoa</b> tira o cascalho; <b>bateia</b> e <b>carumbé</b> separam o ouro.</li>
+    </ol>
+    <h3>🗂️ Onde está cada assunto</h3>
+    <table class="rel">
+      <tr><th>Assunto da prova</th><th>Sala</th></tr>
+      <tr><td>O que é meio ambiente; Constituição de 1988 (p. 94–96)</td><td>1 · Sala do Meio Ambiente</td></tr>
+      <tr><td>Pau-brasil (p. 97–98, 121)</td><td>2 · Sala do Pau-Brasil</td></tr>
+      <tr><td>Cana-de-açúcar e o solo (p. 99–101)</td><td>3 · Sala da Cana-de-Açúcar</td></tr>
+      <tr><td>Ouro em Minas e café (p. 101–104, 121)</td><td>4 · Sala do Ouro e do Café</td></tr>
+      <tr><td>Serviços públicos, iluminação, baleias, usinas (p. 105–107, 121)</td><td>5 · Sala da Luz da Cidade</td></tr>
+      <tr><td>Água, esgoto, lixo e saneamento (p. 107–109, 112, 114)</td><td>6 · Sala da Água, do Esgoto e do Lixo</td></tr>
+      <tr><td>Áreas de conservação; "O que eu aprendi" (p. 112–113, 125)</td><td>7 · Sala dos Parques</td></tr>
+      <tr><td>O que é tecnologia (p. 128–130)</td><td>8 · Sala da Tecnologia</td></tr>
+      <tr><td>Machado de mão e ferreiro (p. 131–132, 148)</td><td>9 · Sala do Machado</td></tr>
+      <tr><td>Cerâmica, olaria e torno (p. 132–135, 149)</td><td>10 · Sala da Cerâmica</td></tr>
+      <tr><td>Engenho, usina e campo (p. 138–139, 141, 151, 153)</td><td>11 · Sala do Engenho e do Campo</td></tr>
+      <tr><td>Mineração e técnicas africanas (p. 142–143, 149)</td><td>12 · Sala da Mineração</td></tr>
+      <tr><td>Fábricas, bonde, eletricidade, robótica (p. 145–147, 152)</td><td>13 · Sala da Cidade Elétrica</td></tr>
+      <tr><td>Tudo misturado ("O que eu aprendi", p. 155)</td><td>14 · Sala Final</td></tr>
+    </table>
+  </div>
+  <div class="card" style="text-align:center">
+    <button class="btn loco" data-proximo="mapa">🧠 Próximo: Mapa Mental para encaixar</button>
+  </div>
+</section>
+
+<!-- ============ MAPA MENTAL ============ -->
+<section class="aba" id="sec-mapa">
+  <div class="card">
+    <h2>🧠 Mapa Mental para encaixar</h2>
+    <p>O mapa do museu está com <b>peças faltando</b>. Em cada buraco, clique na palavra certa. Acertou? A peça fica verde. Errou? Ela balança e você tenta de novo.</p>
+  </div>
+  <div class="contador" id="contadorMapa">🧩 Mapa: 0 peças encaixadas</div>
+  <div class="mapa incompleto" id="mapa">
+    <div class="centro">🏛️ Museu das Engenhocas<br><span style="font-weight:normal;font-size:.85em">meio ambiente · trabalho · tecnologia</span></div>
+    <div class="ramos" id="ramosMapa"></div>
+  </div>
+  <div class="card" id="mapaFim" style="display:none;text-align:center">
+    <div class="trofeu">🧠</div>
+    <h2>Mapa completo!</h2>
+    <p>Foi você que montou esse mapa. Agora ele está inteiro e colorido!</p>
+  </div>
+  <div class="card" style="text-align:center">
+    <button class="btn loco" data-proximo="vf">✅ Próximo: Verdadeiro ou Falso</button>
+  </div>
+</section>
+
+<!-- ============ VERDADEIRO OU FALSO ============ -->
+<section class="aba" id="sec-vf">
+  <div class="card" id="vfJogo"></div>
+  <div class="card" style="text-align:center">
+    <button class="btn loco" data-proximo="resumo">🗺️ Próximo: Resumo</button>
+  </div>
+</section>
+
+<!-- ============ RESUMO ============ -->
+<section class="aba" id="sec-resumo">
+  <div class="card">
+    <h2>🗺️ Resumo do Museu</h2>
+    <p>Tudo o que cai na prova numa página só. Leia até o fim: lá embaixo tem um botão para marcar que você terminou.</p>
+  </div>
+
+  <div class="card">
+    <h2>⏳ Linha do tempo</h2>
+    <p class="sub">As datas que o livro mostra, em ordem.</p>
+    <div class="linha-tempo" id="linhaTempo"></div>
+  </div>
+
+  <div class="card">
+    <h2>🌳 Ala Verde em 5 ideias</h2>
+    <div class="regra"><b>Meio ambiente</b> = seres vivos + elementos sem vida + como se relacionam. Tem elementos <b>naturais</b> (águas, solo, ar, fauna, flora) e <b>construídos</b> (ruas, praças, prédios, sítios arqueológicos).</div>
+    <div class="regra"><b>Riquezas exploradas:</b> pau-brasil (litoral, 1500) → cana-de-açúcar (1532, monocultura) → ouro em Minas (1690) → café no Vale do Paraíba (1830 principal exportação). Todas derrubaram mata nativa.</div>
+    <div class="regra"><b>Luz:</b> velas → lampiões a óleo (1794, óleo de baleia) → gás (1854) → elétrica (1883). Campos (RJ) tinha termelétrica. Hoje: hidrelétricas e lâmpadas de LED.</div>
+    <div class="regra"><b>Água e esgoto:</b> aquedutos levavam água a chafarizes (Recife e Rio). Esgoto em barris, levado por escravizados. 1º tratamento de esgoto: Ouro Preto. Coleta de lixo: 1880 (Rio foi a 1ª).</div>
+    <div class="regra"><b>Parques:</b> 1850 Lei de Terras (raridade e beleza) · 1861–1889 replantio da Tijuca · 1896 1º parque (SP) · 1934 Código Florestal.</div>
+  </div>
+
+  <div class="card">
+    <h2>⚙️ Ala das Engenhocas em 5 ideias</h2>
+    <div class="regra azulado"><b>Tecnologia</b> = tudo o que o ser humano cria, com técnicas, para facilitar a vida. Existem tecnologias <b>antigas</b> e <b>atuais</b>.</div>
+    <div class="regra azulado"><b>Machado de mão:</b> pedra lascada, para caçar e cortar alimentos. Hoje o <b>ferreiro</b> esquenta, forja e esfria o metal.</div>
+    <div class="regra azulado"><b>Cerâmica:</b> oleiro, olaria, marajoaras. Jesuítas trouxeram o <b>torno</b>. Etapas: peneirar → amassar → descansar → torno → secar → forno → pintar.</div>
+    <div class="regra azulado"><b>Engenho:</b> moenda (caldo) → caldeiras (melado) → purgar (açúcar). Hoje: usinas (açúcar, álcool, etanol), drones e máquinas no campo.</div>
+    <div class="regra azulado"><b>Mineração e cidade:</b> africanos da Costa da Mina trouxeram bateia, carumbé e canoa. Fábricas a vapor → eletricidade → bonde elétrico, cinema, robótica, impressão 3D.</div>
+  </div>
+
+  <div class="card">
+    <h2>🔤 Palavras importantes</h2>
+    <div class="grade">
+      <div class="palavra"><b>Meio ambiente</b>: seres vivos, elementos sem vida e suas relações.</div>
+      <div class="palavra"><b>Sítio arqueológico</b>: lugar de importância histórica, como as ruínas jesuíticas de São Miguel das Missões (RS).</div>
+      <div class="palavra"><b>Pau-brasil</b>: árvore nativa; dava corante vermelho e madeira.</div>
+      <div class="palavra"><b>Monocultura</b>: plantar só um produto.</div>
+      <div class="palavra"><b>Melaço</b>: açúcar mais escuro e de sabor forte.</div>
+      <div class="palavra"><b>Adubação</b>: colocar adubo no solo. <b>Irrigação</b>: dar água às plantas de forma controlada.</div>
+      <div class="palavra"><b>Garimpeiro</b>: quem procura ouro e pedras preciosas.</div>
+      <div class="palavra"><b>Erosão</b>: desgaste do solo, que pode abrir buracos.</div>
+      <div class="palavra"><b>Serviço público</b>: serviço para a população, feito pelo governo ou empresa contratada.</div>
+      <div class="palavra"><b>Castiçal</b>: suporte para vela.</div>
+      <div class="palavra"><b>Aqueduto</b>: construção que levava água até chafarizes e fontes.</div>
+      <div class="palavra"><b>Saneamento básico</b>: água, esgoto, limpeza urbana, lixo, pragas e água da chuva.</div>
+      <div class="palavra"><b>Proliferação</b>: aumento, multiplicação.</div>
+      <div class="palavra"><b>Tecnologia</b>: criação humana feita com técnicas para facilitar a vida.</div>
+      <div class="palavra"><b>Pedra lascada</b>: técnica de bater pedras para afiar a ponta.</div>
+      <div class="palavra"><b>Ferreiro</b>: faz objetos de metal.</div>
+      <div class="palavra"><b>Oleiro / ceramista</b>: faz cerâmica com argila.</div>
+      <div class="palavra"><b>Olaria</b>: oficina do oleiro; "ola" = pote de barro.</div>
+      <div class="palavra"><b>Torno</b>: máquina que faz o barro girar.</div>
+      <div class="palavra"><b>Bateia</b>: prato fundo para separar o ouro do cascalho.</div>
+      <div class="palavra"><b>Motorneiro</b>: condutor do bonde.</div>
+      <div class="palavra"><b>Robótica</b>: projetar, construir e operar robôs.</div>
+      <div class="palavra"><b>Impressão 3D</b>: objetos em 3 dimensões a partir de modelo no computador.</div>
+      <div class="palavra"><b>Biotecnologia</b>: modificar seres vivos, como para melhorar grãos.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📌 Dicas de prova</h2>
+    <div class="postits">
+      <div class="postit"><b>1794 · 1854 · 1883</b> = óleo · gás · eletricidade nas ruas.</div>
+      <div class="postit">Pau-brasil: <b>1500 a 1530</b>. Açúcar: <b>1532</b>. Ouro: <b>1690</b>. Café: sementes <b>1727</b>, principal produto em <b>1830</b>.</div>
+      <div class="postit"><b>Constituição de 1988</b> (art. 225): meio ambiente é direito de todos e dever do poder público e da coletividade.</div>
+      <div class="postit">Saneamento básico é direito: <b>Constituição de 1988</b> e <b>Lei 11.445 de 2007</b>. Mas nem todos têm acesso!</div>
+      <div class="postit">Termelétrica = <b>carvão</b> e vapor. Hidrelétrica = <b>força das águas</b> (Itaipu).</div>
+      <div class="postit">Primeiras invenções: por causa da <b>alimentação</b> (machado de mão).</div>
+    </div>
+  </div>
+
+  <div class="card relampago">
+    <h2>⚡ Mini-quiz relâmpago</h2>
+    <p class="sub">Pense na resposta e clique para conferir.</p>
+    <div id="relampago"></div>
+  </div>
+
+  <div class="card" style="text-align:center" id="fimResumo">
+    <p>Chegou até aqui? Então marque:</p>
+    <button class="btn" id="btLiResumo" disabled>✅ Li o resumo até o fim</button>
+    <p class="sub" id="txtLiResumo">O botão acende quando você chegar ao fim da página.</p>
+    <button class="btn loco" data-proximo="simulado">📝 Pronto para o Simulado!</button>
+  </div>
+</section>
+
+<!-- ============ SIMULADO ============ -->
+<section class="aba" id="sec-simulado">
+  <div class="card">
+    <h2>📝 Simulado do Museu</h2>
+    <p><b>25 questões</b>. Leia com atenção, marque uma alternativa em cada questão e clique em <b>Enviar</b> no final. Depois aparecem sua nota, seu código e o gabarito comentado.</p>
+    <div class="barra"><div id="barraSim"></div></div>
+    <p class="sub" id="txtSim"></p>
+  </div>
+  <div id="questoesSim"></div>
+  <div class="card" style="text-align:center" id="envioSim">
+    <button class="btn loco" id="btEnviarSim">📨 Enviar Simulado</button>
+  </div>
+  <div id="resultadoSim"></div>
+</section>
+
+</main>
+<footer>🏛️ Museu das Engenhocas · História 3º ano · conteúdo do livro Phases História 3 – Livro 2 (Unidades 10 e 11)</footer>
+
+<div class="fundo-modal" id="fundoModal"><div class="modal" id="modal"></div></div>
+<script>
+
+// ===================== DADOS (fonte: Phases História 3 – Livro 2, Unidades 10 e 11 — lido no P+) =====================
+const BLOCOS = [
+{ id:'b1', emoji:'🌳', titulo:'Sala do Meio Ambiente', tema:'O que é meio ambiente', pag:'p. 94 a 96', cor:'#2E8B57', ala:'verde',
+  html:`<p class="narrador">Capi diz: "Oi! Eu sou a Capi, a capivara que cuida deste museu. Na primeira sala, uma pergunta: o meio ambiente é só a floresta?"</p>
+<p>Não! <b>Meio ambiente</b> é o conjunto dos <b>seres vivos</b> e dos <b>elementos sem vida</b> do lugar onde eles estão, e também a forma como tudo isso se relaciona.</p>
+<div class="duas"><div class="regra">🌿 <b>Elementos naturais</b><br>recursos hídricos (as águas), solo, ar, fauna (animais) e flora (plantas).</div>
+<div class="regra azulado">🏙️ <b>Elementos construídos</b> pelos seres humanos<br>ruas, praças, edificações, redes de transporte e também lugares históricos, como <b>sítios arqueológicos</b> e prédios antigos.</div></div>
+<p>Nos municípios também existem as <b>áreas de conservação ambiental</b>: áreas públicas que protegem a natureza e que a população pode visitar para passear. O exemplo mais comum são os <b>parques públicos</b>.</p>
+<div class="caixa">📜 <b>Constituição Federal de 1988, artigo 225:</b> todos têm direito a um meio ambiente equilibrado. O <b>poder público</b> (o governo) e a <b>coletividade</b> (todos nós) têm o dever de defendê-lo e preservá-lo para quem vive hoje e para as <b>futuras gerações</b>.</div>`,
+  palavras:['meio ambiente','elementos naturais','elementos construídos','sítio arqueológico','parque público','Constituição de 1988'],
+  qs:[
+   {q:'Uma praça, uma rua antiga e as ruínas de uma igreja jesuítica são elementos do meio ambiente. De que tipo?', o:[
+     {t:'Construídos pelos seres humanos',ok:1,w:'Isso! Praças, ruas e lugares históricos foram construídos por pessoas, e também fazem parte do meio ambiente.'},
+     {t:'Naturais, porque estão ao ar livre',w:'Estar ao ar livre não torna algo natural. Rios, solo, ar, fauna e flora é que são naturais.'},
+     {t:'Não fazem parte do meio ambiente',w:'Fazem, sim! O meio ambiente inclui também o que foi construído, até os lugares históricos.'},
+     {t:'Fauna e flora',w:'Fauna são os animais e flora são as plantas. Praça e rua são elementos construídos.'}]},
+   {q:'Qual é o exemplo mais comum de área de conservação ambiental dentro de um município?', o:[
+     {t:'Os parques públicos',ok:1,w:'Certo! Os parques protegem a natureza e a população pode visitá-los para lazer.'},
+     {t:'As fábricas',w:'Fábricas não são áreas de conservação. O exemplo mais comum são os parques públicos.'},
+     {t:'As redes de transporte',w:'Redes de transporte são elementos construídos, não áreas de conservação.'},
+     {t:'Os sítios arqueológicos',w:'Sítios arqueológicos são lugares históricos. Área de conservação mais comum: parques públicos.'}]},
+   {q:'Segundo o artigo 225 da Constituição de 1988, quem deve defender e preservar o meio ambiente?', o:[
+     {t:'O poder público e toda a coletividade',ok:1,w:'Isso! O governo e todos nós, pensando também nas futuras gerações.'},
+     {t:'Somente o governo',w:'O artigo diz que o dever é do poder público E da coletividade, ou seja, de todos.'},
+     {t:'Somente quem mora perto de florestas',w:'O dever é de todos, more onde morar.'},
+     {t:'Somente os cientistas',w:'Não. O dever é do poder público e de toda a coletividade.'}]}
+  ]},
+{ id:'b2', emoji:'🪵', titulo:'Sala do Pau-Brasil', tema:'A primeira riqueza explorada', pag:'p. 97 e 98', cor:'#C0392B', ala:'verde',
+  html:`<p>Por volta de <b>1500</b>, os navegadores portugueses chegaram a uma terra cheia de recursos naturais. No litoral (onde hoje é o <b>Nordeste</b>), eles encontraram o primeiro recurso explorado para dar lucro: o <b>pau-brasil</b>, uma árvore nativa.</p>
+<div class="duas"><div class="regra">🇵🇹 <b>Os portugueses</b> queriam:<br>• o <b>corante vermelho</b>, para tingir tecidos (era raro e caro na Europa, porque ainda não existiam corantes artificiais);<br>• a <b>madeira</b>, para fazer instrumentos musicais, móveis e utensílios.</div>
+<div class="regra azulado">🪶 <b>Os indígenas</b> usavam:<br>• o corante para tingir <b>penas</b> de enfeites e objetos de rituais;<br>• a madeira para <b>moradias</b>, <b>arcos e flechas</b>.</div></div>
+<p>A extração começou por volta de 1500 e foi muito forte até <b>1530</b>. Quem cortava e carregava as toras até os navios eram os <b>indígenas</b>. Toneladas de madeira foram levadas para a Europa.</p>
+<div class="caixa">⚠️ Naquela época, os europeus <b>não se preocupavam com a preservação</b>: não sabiam que os recursos naturais têm limite. Em poucas décadas, o <b>litoral</b> mudou muito e foi a área mais atingida pela exploração.</div>`,
+  palavras:['pau-brasil','corante vermelho','litoral','mão de obra indígena','1500 a 1530'],
+  qs:[
+   {q:'Por que o corante vermelho do pau-brasil valia tanto na Europa?', o:[
+     {t:'Porque ainda não existiam corantes artificiais, e o vermelho era raro',ok:1,w:'Exato! Sem corante artificial, a tinta vermelha era rara e valiosa.'},
+     {t:'Porque servia para adoçar comidas',w:'Quem adoça é o açúcar. O corante servia para tingir tecidos.'},
+     {t:'Porque era usado para iluminar as ruas',w:'Para iluminar usavam velas e, depois, óleo. O corante tingia tecidos.'},
+     {t:'Porque os europeus tinham muitas árvores de pau-brasil',w:'O pau-brasil é uma árvore nativa daqui. Na Europa, o vermelho era raro.'}]},
+   {q:'Qual destes era um uso do pau-brasil pelos INDÍGENAS?', o:[
+     {t:'Tingir penas usadas como enfeite e fazer arcos e flechas',ok:1,w:'Isso! Eles usavam o corante nas penas e a madeira em moradias, arcos e flechas.'},
+     {t:'Vender toneladas de madeira na Europa',w:'Quem levava a madeira para a Europa eram os portugueses.'},
+     {t:'Tingir tecidos para vender aos europeus',w:'Tingir tecidos era o interesse dos portugueses. Os indígenas tingiam penas.'},
+     {t:'Fabricar móveis para os palácios',w:'Móveis e instrumentos musicais eram usos dos europeus.'}]},
+   {q:'Qual região do Brasil foi a mais atingida pela exploração do pau-brasil?', o:[
+     {t:'O litoral',ok:1,w:'Certo! A mata do litoral foi derrubada em poucas décadas.'},
+     {t:'O interior de Minas Gerais',w:'Minas foi atingida mais tarde, pela busca de ouro. O pau-brasil estava no litoral.'},
+     {t:'O Oeste Paulista',w:'O Oeste Paulista aparece na história do café, bem depois.'},
+     {t:'O sertão',w:'O sertão (interior) foi desmatado depois, na mineração. O pau-brasil ficava no litoral.'}]}
+  ]},
+{ id:'b3', emoji:'🍬', titulo:'Sala da Cana-de-Açúcar', tema:'Os canaviais e o solo', pag:'p. 99 a 101', cor:'#E8A317', ala:'verde',
+  html:`<p>Por volta de <b>1532</b>, os portugueses começaram a produzir <b>açúcar</b> no Brasil. O açúcar era muito desejado na Europa. O solo fértil e o clima daqui ajudavam o cultivo da <b>cana-de-açúcar</b>.</p>
+<ul><li>Foram criadas <b>grandes fazendas</b> só de cana. Plantar <b>apenas um produto</b> se chama <b>monocultura</b>.</li>
+<li>Nos <b>engenhos</b> ficava a <b>moenda</b>, que transformava a cana em açúcar e <b>melaço</b> (um açúcar mais escuro e de sabor forte).</li>
+<li>No começo trabalhavam <b>indígenas</b>; depois, <b>africanos escravizados</b>.</li></ul>
+<p>🖼️ O pintor <b>Frans Post</b>, nascido na <b>Holanda</b>, viveu no Brasil de 1637 a 1644 e pintou engenhos, vilas e paisagens daqui.</p>
+<div class="caixa">🔁 <b>O ciclo que estragava a mata:</b> desmatavam a área → queimavam para limpar o terreno → plantavam sem <b>adubação</b> (adubo) e sem <b>irrigação</b> (água controlada) → o solo perdia os nutrientes → buscavam <b>novas áreas</b> e desmatavam de novo.</div>
+<p>O preço do açúcar caiu na Europa, mas a produção no Brasil <b>nunca parou</b>: passou a ser vendida aqui dentro. Os produtores trouxeram moendas novas, mas o estrago no ambiente continuou grande.</p>`,
+  palavras:['monocultura','engenho','moenda','melaço','queimada','adubação','irrigação'],
+  qs:[
+   {q:'O que é monocultura?', o:[
+     {t:'Plantar apenas um produto em uma grande propriedade',ok:1,w:'Isso! "Mono" lembra um só: os canaviais eram só de cana.'},
+     {t:'Plantar vários alimentos misturados',w:'Isso é o contrário. Monocultura é cultivar apenas um produto.'},
+     {t:'Plantar com adubo e irrigação',w:'Os canaviais nem usavam adubo nem irrigação. Monocultura é cultivar um só produto.'},
+     {t:'Plantar árvores para recuperar a mata',w:'Isso seria replantio. Monocultura é cultivar um único produto.'}]},
+   {q:'Por que os colonizadores viviam desmatando NOVAS áreas para plantar cana?', o:[
+     {t:'Porque o solo usado sem adubo e sem irrigação perdia os nutrientes',ok:1,w:'Certo! O solo cansado não servia mais, e eles derrubavam outra parte da mata.'},
+     {t:'Porque a cana só cresce uma vez em cada lugar do mundo',w:'O livro não diz isso. O problema era o solo, que se desgastava sem cuidado.'},
+     {t:'Porque precisavam de madeira para fazer corante',w:'Corante vinha do pau-brasil. Na cana, o motivo era o solo desgastado.'},
+     {t:'Porque a lei mandava trocar de lugar todo ano',w:'Não havia essa lei. O solo perdia os nutrientes e eles procuravam novas áreas.'}]},
+   {q:'Quando o preço do açúcar caiu na Europa, o que aconteceu com a produção no Brasil?', o:[
+     {t:'Continuou, vendendo para os consumidores daqui',ok:1,w:'Isso! A produção nunca parou: passou a ser destinada ao mercado interno.'},
+     {t:'Parou de uma vez',w:'O livro diz que a produção nunca parou.'},
+     {t:'Foi trocada pela caça às baleias',w:'A caça às baleias é outro assunto (óleo para iluminação).'},
+     {t:'Mudou toda para o Oeste Paulista',w:'O Oeste Paulista aparece na história do café, não do açúcar.'}]}
+  ]},
+{ id:'b4', emoji:'⛏️', titulo:'Sala do Ouro e do Café', tema:'Mineração e cafezais', pag:'p. 101 a 104', cor:'#8E5BD0', ala:'verde',
+  html:`<h3>🪙 O ouro de Minas Gerais</h3>
+<p>A partir de <b>1690</b>, começou a busca por <b>ouro e pedras preciosas</b> em Minas Gerais. Surgiram muitas <b>vilas</b>. No <b>sertão</b> (o interior), a mata era derrubada e os troncos viravam <b>carvão</b>, a única fonte de energia no interior. Também abriram estradas para levar o ouro.</p>
+<p>A cidade de <b>Ouro Preto</b> chegou a ter cerca de <b>80 mil habitantes</b>. Quando o ouro começou a acabar, a partir de <b>1750</b>, os <b>garimpeiros</b> (quem procura metais e pedras preciosas) passaram para a lavoura e a criação de gado, usando muitas <b>queimadas</b>.</p>
+<h3>☕ O café do Vale do Paraíba</h3>
+<p>As primeiras sementes de café chegaram em <b>1727</b>. Em <b>1830</b>, o café já era o <b>principal produto exportado</b> pelo Brasil. As fazendas ficavam no <b>Vale do Paraíba</b>, entre o Rio de Janeiro e São Paulo: monocultura, trabalho escravizado e derrubada da <b>Mata Atlântica</b>. O fogo das queimadas muitas vezes saía do controle. Até a <b>Floresta da Tijuca</b>, no Rio, virou cafezal.</p>
+<div class="caixa">💥 <b>Estragos:</b> perda de animais e plantas, <b>nascentes</b> atingidas, solo pobre e <b>erosão</b> (o desgaste do solo, que pode abrir grandes buracos no chão).</div>
+<p>Com o solo cansado e com o fim da escravidão, o café do Vale do Paraíba decaiu. O <b>Oeste Paulista</b> virou o novo centro do café: terras <b>mais férteis</b>, novas técnicas e trabalho de <b>imigrantes</b> desde 1847.</p>`,
+  palavras:['1690 ouro em Minas','sertão','carvão','garimpeiro','Vale do Paraíba','Mata Atlântica','erosão','Oeste Paulista'],
+  qs:[
+   {q:'Na região das minas, para que servia a madeira das árvores derrubadas?', o:[
+     {t:'Virava carvão, a única fonte de energia do interior',ok:1,w:'Isso! O carvão era a energia do interior da colônia.'},
+     {t:'Virava corante vermelho para tecidos',w:'Corante vinha do pau-brasil, no litoral.'},
+     {t:'Era plantada de novo para proteger as nascentes',w:'Ninguém replantava ali. Os troncos viravam carvão.'},
+     {t:'Era usada para fazer bateias de metal',w:'A bateia é um recipiente de lavar cascalho. A madeira virava carvão.'}]},
+   {q:'O que é erosão?', o:[
+     {t:'O desgaste do solo, que pode abrir grandes buracos no chão',ok:1,w:'Certo! O solo pobre do café sofria erosão.'},
+     {t:'Plantar um único produto na fazenda',w:'Isso é monocultura.'},
+     {t:'Levar água até o chafariz',w:'Isso era feito pelos aquedutos.'},
+     {t:'Queimar a mata para limpar o terreno',w:'Isso é queimada. Erosão é o desgaste do solo.'}]},
+   {q:'Por que o Oeste Paulista se tornou o novo centro do café?', o:[
+     {t:'Tinha terras mais férteis, novas técnicas e trabalho de imigrantes',ok:1,w:'Isso! Por isso o fim da escravidão quase não atrapalhou a produção de lá.'},
+     {t:'Era onde ficava a Floresta da Tijuca',w:'A Floresta da Tijuca fica no Rio de Janeiro e virou cafezal.'},
+     {t:'Foi onde chegaram as primeiras sementes em 1727',w:'O livro não diz isso. O Oeste Paulista venceu por terras férteis, técnicas e imigrantes.'},
+     {t:'Ali não se derrubava nenhuma árvore',w:'O motivo foi outro: terras férteis, técnicas e imigrantes.'}]}
+  ]},
+{ id:'b5', emoji:'🏮', titulo:'Sala da Luz da Cidade', tema:'Serviços públicos e iluminação', pag:'p. 105 a 107 e 121', cor:'#F28C28', ala:'verde',
+  html:`<p>Hoje os moradores de um município usam os <b>serviços públicos</b>: luz, água, esgoto, coleta de lixo... Eles são feitos pelo <b>governo</b> ou por <b>empresas contratadas</b> por ele. A população paga <b>taxas</b>, e esse dinheiro paga os trabalhadores e as outras despesas.</p>
+<h3>💡 A história da iluminação</h3>
+<div class="degraus">
+<div>🕯️ <b>Antigamente:</b> <b>velas</b> em castiçais ou candelabros. Nas ruas, só havia luz de velas nas fachadas em dias de festa.</div>
+<div>🏮 <b>1794:</b> começa a iluminação pública, com <b>lampiões</b> a óleos vegetais e animais (azeite e <b>óleo de baleia</b>). Quem acendia eram os <b>acendedores de lampiões</b>.</div>
+<div>🔥 <b>1854:</b> Rio de Janeiro e São Paulo ganham <b>lampiões a gás</b>.</div>
+<div>💡 <b>1883:</b> chega a <b>iluminação elétrica</b> nas ruas, com <b>lâmpadas incandescentes</b>.</div>
+<div>🔆 <b>Hoje:</b> lâmpadas <b>fluorescentes</b> ou de <b>LED</b>, que gastam menos energia, iluminam mais e duram mais. As incandescentes estão saindo porque esquentam e gastam muita energia.</div></div>
+<div class="caixa">🐋 <b>Caça às baleias:</b> desde o tempo da colônia, baleias eram caçadas (Bahia e Rio de Janeiro) para fazer sabão, vela, argamassa e, principalmente, <b>óleo para iluminar</b>. A caça foi tão grande que as baleias diminuíram. Ela foi abandonada aos poucos, com novas fontes de energia, como o <b>petróleo</b>.</div>
+<p>⚡ A primeira cidade brasileira com iluminação elétrica foi <b>Campos</b> (RJ), porque lá havia uma <b>usina termelétrica</b>: ela queima carvão, a água esquenta, o vapor gira as turbinas e isso gera energia. Hoje, quase toda a nossa eletricidade vem das <b>usinas hidrelétricas</b>, que usam a força do movimento das <b>águas</b>, como a de <b>Itaipu</b>.</p>`,
+  palavras:['serviços públicos','taxas','velas','lampiões (1794)','óleo de baleia','lampiões a gás (1854)','iluminação elétrica (1883)','termelétrica','hidrelétrica','LED'],
+  qs:[
+   {q:'Qual é a ordem certa da história da iluminação nas cidades brasileiras?', o:[
+     {t:'Velas → lampiões a óleo → lampiões a gás → luz elétrica',ok:1,w:'Isso! Velas, depois 1794 (óleo), 1854 (gás) e 1883 (elétrica).'},
+     {t:'Lampiões a gás → velas → luz elétrica → lampiões a óleo',w:'Primeiro vieram as velas; o óleo foi em 1794 e o gás em 1854.'},
+     {t:'Velas → luz elétrica → lampiões a óleo → lampiões a gás',w:'A luz elétrica foi a última, em 1883.'},
+     {t:'Lampiões a óleo → velas → lampiões a gás → luz elétrica',w:'As velas vieram antes dos lampiões de 1794.'}]},
+   {q:'Por que as baleias eram tão caçadas no Brasil antigo?', o:[
+     {t:'O óleo delas era queimado para iluminar',ok:1,w:'Certo! O óleo de baleia acendia os lampiões. Também faziam sabão, vela e argamassa.'},
+     {t:'A carne delas virava açúcar',w:'Não! O principal produto da baleia era o óleo para iluminação.'},
+     {t:'Os ossos delas viravam bateias',w:'Bateias eram recipientes da mineração. A baleia dava óleo para iluminar.'},
+     {t:'Para proteger os peixes do litoral',w:'Não. A caça era pelo óleo, e foi tão grande que as baleias diminuíram.'}]},
+   {q:'Por que Campos (RJ) foi a primeira cidade a ter iluminação elétrica?', o:[
+     {t:'Porque tinha uma usina termelétrica, que gerava energia queimando carvão',ok:1,w:'Isso! O vapor da água aquecida girava as turbinas.'},
+     {t:'Porque tinha a usina hidrelétrica de Itaipu',w:'Itaipu fica no rio Paraná, entre Brasil e Paraguai. Campos tinha uma termelétrica.'},
+     {t:'Porque tinha muitos acendedores de lampiões',w:'Acendedores trabalhavam com lampiões a óleo, não com luz elétrica.'},
+     {t:'Porque usava óleo de baleia nas lâmpadas',w:'Óleo de baleia era dos lampiões antigos. Campos tinha uma usina termelétrica.'}]}
+  ]},
+{ id:'b6', emoji:'🚰', titulo:'Sala da Água, do Esgoto e do Lixo', tema:'Saneamento básico', pag:'p. 107 a 109, 112 e 114', cor:'#2F80C2', ala:'verde',
+  html:`<p>A <b>água</b> que usamos para cozinhar, tomar banho e lavar faz parte do <b>saneamento básico</b>. Antes de chegar às casas, ela é limpa nas <b>estações de tratamento de água</b> e viaja pela <b>rede de abastecimento</b> (canos) até as torneiras e chuveiros.</p>
+<p>🏛️ <b>No tempo da colônia:</b> Recife e Rio de Janeiro foram as primeiras a levar água à população. Usavam <b>aquedutos</b>: construções perto de rios, lagos e lagoas que levavam a água até <b>chafarizes, bicas e fontes públicas</b>.</p>
+<p>🚽 <b>Esgoto</b> é a água já usada (banho, roupa, louça, descarga). Ela vai pelos canos até as <b>estações de tratamento de esgoto</b> e, depois de tratada, pode voltar aos rios. O <b>primeiro sistema</b> de tratamento de esgoto do Brasil foi feito no século XIX, em <b>Ouro Preto</b> (MG). Antes disso, pessoas <b>escravizadas</b> carregavam o esgoto em <b>barris</b> e jogavam nos rios e no mar.</p>
+<p>🗑️ Também não havia <b>coleta de lixo</b>: o lixo era jogado na rua e atraía <b>ratos, baratas e moscas</b>, espalhando doenças. A coleta começou em <b>1880</b>, e o <b>Rio de Janeiro</b> foi a primeira cidade com serviço de limpeza urbana.</p>
+<div class="caixa">📋 <b>Saneamento básico</b> = água potável + coleta e tratamento de esgoto + limpeza urbana + cuidado com o lixo + controle de pragas + cuidado com a água da chuva. É um <b>direito</b> garantido pela <b>Constituição de 1988</b> e pela <b>Lei nº 11.445, de 2007</b>.</div>`,
+  palavras:['saneamento básico','estação de tratamento','aqueduto','chafariz','esgoto','coleta de lixo (1880)','Lei 11.445/2007'],
+  qs:[
+   {q:'Para que serviam os aquedutos no tempo da colônia?', o:[
+     {t:'Levar a água de rios e lagos até chafarizes, bicas e fontes',ok:1,w:'Isso! Foram as primeiras obras de distribuição de água, em Recife e no Rio.'},
+     {t:'Tratar o esgoto antes de jogar no rio',w:'Tratamento de esgoto só começou no século XIX, em Ouro Preto. Aqueduto levava água.'},
+     {t:'Iluminar as ruas à noite',w:'Quem iluminava eram os lampiões.'},
+     {t:'Moer a cana para fazer açúcar',w:'Isso era a moenda do engenho.'}]},
+   {q:'Antes do primeiro sistema de tratamento de esgoto, o que acontecia com o esgoto das casas?', o:[
+     {t:'Escravizados o carregavam em barris e jogavam nos rios e no mar',ok:1,w:'Certo! Era um trabalho forçado e sujava as águas.'},
+     {t:'Ia por canos até as estações de tratamento',w:'Isso é como acontece hoje, não antes.'},
+     {t:'Era usado para molhar as plantações de café',w:'O livro não diz isso. Era jogado em rios e no mar.'},
+     {t:'Ficava guardado nos aquedutos',w:'Aquedutos levavam água limpa, não esgoto.'}]},
+   {q:'Qual destes serviços NÃO faz parte do saneamento básico?', o:[
+     {t:'A produção de açúcar nas usinas',ok:1,w:'Isso! Usina de açúcar é uma atividade produtiva. Saneamento é água, esgoto, limpeza urbana, lixo, pragas e água da chuva.'},
+     {t:'A coleta e o tratamento de esgoto',w:'Esse faz parte do saneamento básico.'},
+     {t:'A limpeza urbana',w:'A limpeza urbana faz parte do saneamento básico.'},
+     {t:'O abastecimento de água potável',w:'A água potável faz parte do saneamento básico.'}]}
+  ]},
+{ id:'b7', emoji:'🏞️', titulo:'Sala dos Parques', tema:'Áreas de conservação ambiental', pag:'p. 112, 113 e 125', cor:'#3BA37A', ala:'verde',
+  html:`<p>A história das <b>áreas de conservação</b> no Brasil começou em <b>1850</b>, com a primeira <b>Lei de Terras</b>. Naquela época, escolhiam proteger lugares pela <b>raridade</b> (poucos exemplares) e pela <b>beleza</b>. Também queriam proteger as <b>nascentes</b>, que davam água às cidades.</p>
+<ul><li>🌱 Entre <b>1861 e 1889</b>, parte da <b>Floresta da Tijuca</b> (RJ) foi <b>replantada</b> para recuperar as águas.</li>
+<li>🌳 Em <b>1896</b> surgiu o primeiro parque criado para preservar o ambiente: o <b>Parque Estadual da Cidade</b>, em São Paulo.</li>
+<li>🔬 Nos parques, os <b>botânicos</b> (estudiosos das plantas) faziam pesquisas.</li>
+<li>📗 Em <b>1934</b>, o primeiro <b>Código Florestal</b> criou os parques <b>nacionais, estaduais e municipais</b>, que passaram oficialmente a proteger o ambiente.</li></ul>
+<div class="caixa">🎯 <b>Para que servem os parques hoje?</b> Preservar e recuperar a natureza, ensinar e pesquisar, <b>produzir água doce</b> para abastecer a cidade e dar qualidade de vida à população.</div>
+<p class="narrador">Capi resume a Ala Verde: "Os portugueses vieram explorar a natureza para ter riquezas. As matas diminuíram muito por causa do desmatamento, das monoculturas e da busca por ouro. E, mesmo sendo um direito, nem todo mundo tem esgoto, água encanada, coleta de lixo e luz!"</p>`,
+  palavras:['Lei de Terras (1850)','replantio da Floresta da Tijuca','primeiro parque (1896)','botânico','Código Florestal (1934)','nascentes'],
+  qs:[
+   {q:'Em 1850, com a Lei de Terras, como eram escolhidos os lugares a proteger?', o:[
+     {t:'Pela raridade e pela beleza',ok:1,w:'Isso! Protegiam pequenas amostras raras ou bonitas da natureza.'},
+     {t:'Pela quantidade de ouro',w:'Lugares com ouro eram explorados, não protegidos.'},
+     {t:'Pelo tamanho dos cafezais',w:'Cafezais destruíam a mata. Os critérios eram raridade e beleza.'},
+     {t:'Pelo número de fábricas',w:'Não. Os critérios eram raridade e beleza.'}]},
+   {q:'Por que parte da Floresta da Tijuca foi replantada entre 1861 e 1889?', o:[
+     {t:'Para recuperar as águas que abasteciam a cidade',ok:1,w:'Certo! Proteger as nascentes era uma grande preocupação.'},
+     {t:'Para plantar mais café',w:'Foi o contrário: os cafezais tinham destruído a floresta.'},
+     {t:'Para tirar mais pau-brasil',w:'O replantio era para recuperar as águas, não para explorar madeira.'},
+     {t:'Para construir a usina de Itaipu',w:'Itaipu fica no rio Paraná e é de outra época.'}]},
+   {q:'O que o primeiro Código Florestal, de 1934, fez?', o:[
+     {t:'Criou parques nacionais, estaduais e municipais para proteger o ambiente',ok:1,w:'Isso! A partir dos anos 1930, os parques passaram oficialmente a proteger o ambiente.'},
+     {t:'Começou a coleta de lixo nas cidades',w:'A coleta de lixo começou em 1880.'},
+     {t:'Liberou as queimadas nas fazendas',w:'Não. O Código Florestal criou parques para proteger o ambiente.'},
+     {t:'Trouxe a iluminação elétrica',w:'A iluminação elétrica chegou em 1883.'}]}
+  ]},
+{ id:'b8', emoji:'📱', titulo:'Sala da Tecnologia', tema:'O que é tecnologia', pag:'p. 128 a 130', cor:'#5B6CD9', ala:'engenhocas',
+  html:`<p class="narrador">Capi diz: "Bem-vindo à Ala das Engenhocas! Aqui tudo é tecnologia. Até o lápis que está aí na sua mão!"</p>
+<p><b>Tecnologia</b> é todo <b>equipamento, ferramenta ou instrumento</b> criado pelo ser humano para facilitar uma atividade de trabalho ou do dia a dia.</p>
+<table class="mini"><tr><th>Onde</th><th>Tecnologias</th></tr>
+<tr><td>📚 Estudo</td><td>livros, cadernos, lápis, canetas, borracha, computador</td></tr>
+<tr><td>💼 Escritório</td><td>computador, tablet, celular, caderneta, caneta</td></tr>
+<tr><td>🎧 Lazer</td><td>celular, computador, fone de ouvido</td></tr>
+<tr><td>🏠 Casa</td><td>fogão, geladeira, micro-ondas, máquina de lavar</td></tr></table>
+<div class="regra">📌 Tecnologia <b>não é só invenção moderna</b>! Toda criação humana que precisa de <b>técnicas</b> para ser feita é tecnologia. Convivemos com tecnologias <b>antigas</b> (cerâmica, objetos de metal, a escrita, o papel, a imprensa) e <b>atuais</b> (computador, celular, tablet, <b>robótica</b>).</div>
+<p>Hoje a palavra "tecnologia" lembra mais as invenções de <b>comunicação e informação</b>. <b>Robótica</b> é a área que projeta, constrói e faz funcionar <b>robôs</b>.</p>`,
+  palavras:['tecnologia','técnica','tecnologias antigas','tecnologias atuais','robótica','tablet'],
+  qs:[
+   {q:'De acordo com o livro, qual grupo tem SOMENTE tecnologias?', o:[
+     {t:'Lápis, pote de cerâmica e computador',ok:1,w:'Isso! Antigas ou modernas, todas são criações humanas feitas com técnicas.'},
+     {t:'Lápis, rio e computador',w:'O rio é um elemento natural, não foi criado pelo ser humano.'},
+     {t:'Celular, árvore e geladeira',w:'A árvore é natural. Tecnologia é o que o ser humano cria.'},
+     {t:'Só celular, tablet e computador',w:'Esses são tecnologias, mas o livro diz que lápis e cerâmica também são!'}]},
+   {q:'Qual frase está CERTA?', o:[
+     {t:'Toda criação humana que exige técnicas para ser feita é tecnologia',ok:1,w:'Certo! Por isso há tecnologias antigas e atuais.'},
+     {t:'Só são tecnologia as invenções que usam eletricidade',w:'Não! A escrita, o papel e a cerâmica também são tecnologia.'},
+     {t:'A tecnologia surgiu junto com o computador',w:'As primeiras tecnologias surgiram há milhares de anos.'},
+     {t:'Tecnologia e natureza são a mesma coisa',w:'Tecnologia é criada pelo ser humano; a natureza não.'}]},
+   {q:'O que estuda a robótica?', o:[
+     {t:'O projeto, a construção e o funcionamento de robôs',ok:1,w:'Isso! Hoje os robôs estão muito presentes nas fábricas.'},
+     {t:'A modelagem do barro no torno',w:'Isso é trabalho do oleiro, na cerâmica.'},
+     {t:'A lavagem do cascalho para achar ouro',w:'Isso era feito com bateia e carumbé, na mineração.'},
+     {t:'A manipulação de seres vivos para melhorar os grãos',w:'Isso é a biotecnologia.'}]}
+  ]},
+{ id:'b9', emoji:'🪓', titulo:'Sala do Machado', tema:'As primeiras invenções e o ferreiro', pag:'p. 131 e 132', cor:'#7A5C3E', ala:'engenhocas',
+  html:`<p>As primeiras invenções humanas surgiram há <b>milhares de anos</b>, por causa de uma necessidade básica: a <b>alimentação</b>.</p>
+<p>🪨 Os primeiros grupos humanos criaram o <b>machado de mão</b>, para <b>caçar</b> e <b>cortar</b> carnes, frutos e sementes. Ele era feito pela técnica da <b>pedra lascada</b>: batiam uma pedra em outra maior, e o <b>atrito</b> ia lascando a ponta até ela ficar afiada.</p>
+<ul><li>No começo, o machado era segurado direto com a mão.</li>
+<li>Depois, foi <b>preso a um cabo de madeira</b>.</li></ul>
+<p>Ele ajudou os primeiros grupos a sobreviver, por isso é uma das <b>primeiras tecnologias</b> da humanidade.</p>
+<div class="caixa">🔨 <b>Hoje</b>, machados são feitos em <b>fábricas</b> ou por <b>ferreiros</b> (quem faz objetos de metal):<br>1️⃣ o fogo <b>esquenta o ferro</b>, que fica mole (maleável);<br>2️⃣ o ferreiro <b>forja</b>: dá forma ao metal com batidas, ainda quente;<br>3️⃣ coloca o metal na <b>água fria</b> para endurecer.</div>`,
+  palavras:['alimentação','machado de mão','pedra lascada','atrito','ferreiro','forjar'],
+  qs:[
+   {q:'Que necessidade levou às primeiras invenções humanas?', o:[
+     {t:'A alimentação',ok:1,w:'Isso! O machado de mão servia para caçar e cortar alimentos.'},
+     {t:'A diversão nas horas livres',w:'O livro diz que foi a necessidade de alimentação.'},
+     {t:'A iluminação das casas',w:'A iluminação veio muito depois. Foi a alimentação.'},
+     {t:'A comunicação a distância',w:'Não. A primeira necessidade foi a alimentação.'}]},
+   {q:'Como se fazia o machado de mão pela técnica da pedra lascada?', o:[
+     {t:'Batendo uma pedra em outra até a ponta ficar afiada',ok:1,w:'Certo! O atrito lascava a pedra maior.'},
+     {t:'Esquentando o ferro no fogo',w:'Isso é o ferreiro, muito tempo depois.'},
+     {t:'Queimando argila no forno',w:'Isso é a cerâmica.'},
+     {t:'Girando a pedra num torno',w:'O torno é da cerâmica e chegou com os jesuítas.'}]},
+   {q:'Um ferreiro forjou a lâmina de um machado. Qual é o próximo passo para ela endurecer?', o:[
+     {t:'Colocar o metal ainda quente na água fria',ok:1,w:'Isso! A água fria endurece o metal forjado.'},
+     {t:'Deixar secando na sombra e no vento',w:'Isso é a secagem da cerâmica.'},
+     {t:'Peneirar o metal para tirar as pedrinhas',w:'Peneirar é a 1ª etapa do barro, na olaria.'},
+     {t:'Pintar e decorar a lâmina',w:'Isso é o fim da cerâmica. No metal, a água fria endurece.'}]}
+  ]},
+{ id:'b10', emoji:'🏺', titulo:'Sala da Cerâmica', tema:'Oleiros, olarias e tornos', pag:'p. 132 a 135', cor:'#B5562E', ala:'engenhocas',
+  html:`<p>A <b>cerâmica</b> é outra tecnologia muito antiga. Com a <b>argila</b> (barro), os primeiros grupos fizeram potes para <b>cozinhar</b>, <b>conservar</b> e <b>transportar</b> alimentos.</p>
+<p>Quem faz cerâmica é o <b>oleiro</b> ou <b>ceramista</b>. Primeiro ele faz a <b>modelagem</b> (decide a forma) e depois a <b>queima</b> da argila. O lugar onde ele trabalha é a <b>olaria</b> (da palavra "ola", pote de barro). As olarias são consideradas as <b>primeiras indústrias</b> da humanidade.</p>
+<ul><li>🇧🇷 No Brasil, destacam-se os <b>marajoaras</b>, da <b>Ilha de Marajó</b> (Pará), e indígenas de várias etnias, que passam a técnica de geração em geração.</li>
+<li>⛪ Os padres <b>jesuítas</b> aprenderam com os indígenas, trouxeram da Europa os <b>tornos</b> (máquinas que fazem o barro girar) e construíram as <b>primeiras olarias</b> do Brasil. A produção ficou mais rápida e maior.</li></ul>
+<div class="etapas">🏺 <b>Etapas na olaria:</b><ol><li><b>Peneirar</b> o barro (tirar pedras e raízes)</li><li><b>Molhar, pisar e amassar</b> até virar uma pasta</li><li>Deixar <b>descansar</b></li><li>Dar forma no <b>torno</b></li><li><b>Secar</b> na sombra e no vento</li><li><b>Queimar</b> no forno bem quente</li><li>Depois de fria: <b>pintar e decorar</b></li></ol></div>
+<p>Hoje a cerâmica está em xícaras, pratos, vasos, <b>tijolos, telhas, pisos e azulejos</b>. Comunidades <b>indígenas, quilombolas e ribeirinhas</b> mantêm a tradição, que é arte e também sustento. Os desafios: a concorrência dos produtos de fábrica e o desinteresse dos mais jovens.</p>`,
+  palavras:['argila','oleiro (ceramista)','modelagem','olaria','marajoaras','jesuítas','torno'],
+  qs:[
+   {q:'Qual foi a contribuição dos padres jesuítas para a cerâmica no Brasil?', o:[
+     {t:'Trouxeram os tornos da Europa e construíram as primeiras olarias',ok:1,w:'Isso! Com o torno, a produção ficou mais rápida.'},
+     {t:'Inventaram a cerâmica no Brasil',w:'Não! Os marajoaras e outros indígenas já faziam cerâmica antes.'},
+     {t:'Trouxeram a bateia da Costa da Mina',w:'A bateia foi uma tecnologia africana da mineração.'},
+     {t:'Proibiram os indígenas de fazer cerâmica',w:'O livro diz que eles aprenderam com os indígenas.'}]},
+   {q:'Qual é a ordem certa de algumas etapas na olaria?', o:[
+     {t:'Peneirar → amassar com água → torno → secar → forno',ok:1,w:'Certo! E, depois de fria, a peça é pintada.'},
+     {t:'Forno → peneirar → torno → secar → amassar',w:'O forno vem quase no fim, depois da secagem.'},
+     {t:'Torno → peneirar → forno → amassar → secar',w:'Primeiro se peneira e amassa o barro; o torno vem depois.'},
+     {t:'Pintar → forno → torno → peneirar → secar',w:'A pintura é a última etapa, com a peça já fria.'}]},
+   {q:'Por que as olarias são chamadas de "primeiras indústrias da humanidade"?', o:[
+     {t:'Porque existiram em quase todas as sociedades, transformando barro em objetos',ok:1,w:'Isso! Foram desenvolvidas em praticamente todas as sociedades.'},
+     {t:'Porque usavam robôs',w:'Robôs são tecnologia atual. As olarias são muito antigas.'},
+     {t:'Porque funcionavam com energia elétrica',w:'Olarias usam técnicas antigas: torno, modelagem e forno.'},
+     {t:'Porque produziam açúcar',w:'Açúcar era feito nos engenhos.'}]}
+  ]},
+{ id:'b11', emoji:'🏭', titulo:'Sala do Engenho e do Campo', tema:'Açúcar ontem e hoje', pag:'p. 138, 139, 141 e 151', cor:'#D4A017', ala:'engenhocas',
+  html:`<p>Em meados do <b>século XVI</b>, os portugueses produziam açúcar nos <b>engenhos</b>. Cada cômodo fazia uma etapa:</p>
+<div class="fluxo"><div>🌾 <b>Casa da moenda</b><br>o cômodo principal: a moenda <b>moía a cana</b> e tirava o <b>caldo</b>. Era movida por <b>pessoas, animais ou roda d'água</b>.</div><span>➡️</span>
+<div>🔥 <b>Casa das caldeiras</b><br>o caldo era <b>cozido</b> em grandes tachos e <b>purificado</b>, virando <b>melado</b>.</div><span>➡️</span>
+<div>☀️ <b>Casa de purgar</b><br>o melado <b>secava</b> e virava <b>açúcar</b>.</div></div>
+<p>O trabalho era feito por <b>indígenas</b> e depois por <b>africanos escravizados</b>. Muitos escravizados dominavam ofícios: sapataria, carpintaria, tecelagem, olaria e <b>metalurgia</b>. Os <b>ferreiros</b> faziam as ferramentas: machados, foices e enxadas.</p>
+<div class="caixa">🏭 <b>Hoje</b> o açúcar é feito em <b>usinas</b>, que produzem também <b>álcool e etanol</b> (combustível de carros).</div>
+<p>🚜 <b>Tecnologia no campo hoje:</b> <b>drones</b> pulverizam e vigiam as plantações; a <b>irrigação por computador</b> economiza água; <b>celulares e tablets</b> mostram o clima na hora; <b>máquinas</b> plantam e colhem. Por isso o trabalhador do campo precisa <b>aprender</b> a usar esses equipamentos.</p>`,
+  palavras:['casa da moenda','casa das caldeiras','casa de purgar','melado','ferreiro','usina','etanol','drone'],
+  qs:[
+   {q:'No engenho, em qual cômodo o caldo da cana era cozido e purificado?', o:[
+     {t:'Na casa das caldeiras',ok:1,w:'Isso! Lá o caldo virava melado nos grandes tachos.'},
+     {t:'Na casa da moenda',w:'Na moenda a cana era moída para tirar o caldo.'},
+     {t:'Na casa de purgar',w:'Na casa de purgar o melado secava e virava açúcar.'},
+     {t:'Na olaria',w:'Olaria é onde se faz cerâmica.'}]},
+   {q:'O que movia a moenda dos engenhos antigos?', o:[
+     {t:'A força de pessoas, de animais ou de uma roda d\'água',ok:1,w:'Certo! Não havia motores elétricos naquela época.'},
+     {t:'Motores elétricos',w:'A eletricidade só chegou muito depois.'},
+     {t:'O etanol',w:'O etanol é produzido hoje nas usinas, não movia moendas.'},
+     {t:'Drones',w:'Drones são tecnologia atual do campo.'}]},
+   {q:'O que as usinas de cana produzem hoje, além do açúcar?', o:[
+     {t:'Álcool e etanol',ok:1,w:'Isso! O etanol é combustível para automóveis.'},
+     {t:'Carvão e óleo de baleia',w:'Isso era usado antigamente para energia e iluminação.'},
+     {t:'Tijolos e telhas',w:'Tijolos e telhas são de cerâmica, feitos em olarias e fábricas.'},
+     {t:'Ouro e pedras preciosas',w:'Ouro vem da mineração, não da cana.'}]}
+  ]},
+{ id:'b12', emoji:'🪙', titulo:'Sala da Mineração', tema:'A tecnologia vinda da África', pag:'p. 142 e 143', cor:'#9C6ADE', ala:'engenhocas',
+  html:`<p>A partir do <b>final do século XVII</b>, foram descobertos <b>ouro e pedras preciosas</b> em Minas Gerais. Surgiram vilas como <b>Ouro Preto, Mariana, Sabará e Caeté</b>, e muita gente foi para o interior.</p>
+<p>O trabalho nas minas era feito por <b>pessoas escravizadas</b>. Mas os africanos trouxeram também <b>conhecimento</b>: na <b>Costa da Mina</b> (hoje Gana, Togo, Benim e Nigéria), as técnicas de mineração do ferro e do ouro e de <b>fundição de metais</b> eram <b>mais avançadas que as europeias</b>. Por isso esses escravizados eram chamados de <b>"mina"</b>.</p>
+<p>Antes disso, aqui se tirava ouro de um jeito simples, com <b>pedaços de madeira e pratos</b>.</p>
+<table class="mini"><tr><th>Tecnologia africana</th><th>Para que servia</th></tr>
+<tr><td>🛶 <b>Canoa</b> (ou <b>mesa</b>)</td><td>tanque para retirar o cascalho dos rios</td></tr>
+<tr><td>🥣 <b>Bateia</b></td><td>lavar e separar o ouro do cascalho; formato de <b>prato fundo</b></td></tr>
+<tr><td>🧺 <b>Carumbé</b></td><td>também lavava e separava o ouro; tinha formatos variados</td></tr>
+<tr><td>🔨 Martelos e marretas de ferro</td><td>transformar pedras de ouro em pó e procurar ouro</td></tr></table>
+<div class="caixa">⚖️ Com essas técnicas, tirava-se <b>mais ouro em menos tempo</b>. Mas os escravizados passaram a ser ainda <b>mais explorados</b>, em condições cada vez piores. Tudo era vigiado pelo <b>capitão do mato</b>.</div>`,
+  palavras:['Costa da Mina','escravizados "mina"','bateia','carumbé','canoa (mesa)','cascalho','capitão do mato'],
+  qs:[
+   {q:'Por que os escravizados vindos da Costa da Mina eram tão procurados para trabalhar no ouro?', o:[
+     {t:'Porque já dominavam técnicas de mineração e fundição de metais',ok:1,w:'Isso! As técnicas deles eram mais avançadas que as europeias.'},
+     {t:'Porque eram especialistas em plantar café',w:'O livro fala do conhecimento de mineração, não de café.'},
+     {t:'Porque sabiam construir aquedutos',w:'Não. Eles dominavam a mineração do ferro e do ouro.'},
+     {t:'Porque trabalhavam como acendedores de lampiões',w:'Não. O motivo era o conhecimento em mineração.'}]},
+   {q:'Qual tecnologia africana tinha formato de prato fundo e servia para separar o ouro do cascalho?', o:[
+     {t:'A bateia',ok:1,w:'Certo! A bateia geralmente parece um prato fundo.'},
+     {t:'A canoa',w:'A canoa (mesa) era um tanque para retirar o cascalho dos rios.'},
+     {t:'O torno',w:'O torno é da cerâmica.'},
+     {t:'A moenda',w:'A moenda moía a cana no engenho.'}]},
+   {q:'O que aconteceu com os escravizados quando as técnicas africanas aumentaram a produção de ouro?', o:[
+     {t:'Passaram a ser ainda mais explorados',ok:1,w:'Isso. Mais ouro em menos tempo significou mais exploração.'},
+     {t:'Foram libertados como recompensa',w:'Não. O livro diz que a exploração aumentou.'},
+     {t:'Viraram donos das minas',w:'Não. Continuaram escravizados e mais explorados.'},
+     {t:'Passaram a vigiar as minas no lugar do capitão do mato',w:'Quem vigiava era o capitão do mato.'}]}
+  ]},
+{ id:'b13', emoji:'🚋', titulo:'Sala da Cidade Elétrica', tema:'Trabalho e tecnologia na cidade', pag:'p. 145 a 147', cor:'#1E88A8', ala:'engenhocas',
+  html:`<p>As primeiras <b>fábricas</b> do Brasil tinham <b>máquinas a vapor</b>, que funcionavam com a queima do <b>carvão</b>. Depois passaram a usar a <b>energia elétrica</b>.</p>
+<p>Com a eletricidade, as cidades se modernizaram depressa e atraíram muita gente: o número de habitantes cresceu muito.</p>
+<ul><li>🚋 Os <b>bondes</b>, antes puxados por animais, ficaram <b>elétricos</b>, andando em <b>trilhos</b> e guiados pelos <b>motorneiros</b>. O transporte público melhorou.</li>
+<li>💡 A <b>iluminação elétrica</b> mudou os hábitos: à noite, as pessoas passeavam e iam ao teatro, ao <b>cinema</b> e a restaurantes.</li>
+<li>🎞️ Os primeiros filmes eram <b>fotografias em sequência</b> que davam a ilusão de movimento.</li>
+<li>💰 Parte do dinheiro do <b>café e do açúcar</b> foi usada nas cidades: viadutos, ruas calçadas e iluminação.</li>
+<li>🏭 Fábricas foram abertas, principalmente em <b>São Paulo</b>. Os primeiros operários foram <b>imigrantes europeus</b>, que já sabiam usar máquinas. Vieram também <b>técnicos estrangeiros</b> para construir <b>estradas de ferro</b> e modernizar o café.</li></ul>
+<div class="caixa">🤖 <b>Hoje</b> as cidades dependem de profissões com tecnologia:<br>• <b>Robótica</b>: robôs e máquinas automáticas nas fábricas.<br>• <b>Impressão 3D</b>: faz objetos de verdade, em três dimensões, a partir de um modelo no computador.<br>• <b>Biotecnologia</b>: mexe em seres vivos para modificá-los, como para melhorar os grãos.<br>• <b>Engenharia de computação</b>.</div>`,
+  palavras:['máquina a vapor','energia elétrica','bonde elétrico','motorneiro','cinema','imigrantes europeus','impressão 3D','biotecnologia'],
+  qs:[
+   {q:'Como funcionavam as máquinas das primeiras fábricas do Brasil?', o:[
+     {t:'A vapor, com a queima do carvão',ok:1,w:'Isso! Só depois as fábricas passaram a usar energia elétrica.'},
+     {t:'Com a força das águas de Itaipu',w:'Itaipu é uma hidrelétrica atual. As primeiras fábricas eram a vapor.'},
+     {t:'Com óleo de baleia',w:'Óleo de baleia era para iluminar. As máquinas eram a vapor.'},
+     {t:'Com etanol',w:'Etanol é combustível de carros, produzido hoje nas usinas.'}]},
+   {q:'Como o livro chama quem conduzia os bondes elétricos?', o:[
+     {t:'Motorneiros',ok:1,w:'Certo! Os motorneiros guiavam os bondes nos trilhos.'},
+     {t:'Garimpeiros',w:'Garimpeiros procuravam ouro e pedras preciosas.'},
+     {t:'Oleiros',w:'Oleiros fazem cerâmica.'},
+     {t:'Acendedores',w:'Acendedores de lampiões acendiam a iluminação antiga.'}]},
+   {q:'Uma empresa fabrica uma peça a partir de um modelo feito no computador, em três dimensões. Que tecnologia é essa?', o:[
+     {t:'Impressão 3D',ok:1,w:'Isso! Ela reproduz objetos em três dimensões a partir de modelos digitais.'},
+     {t:'Biotecnologia',w:'Biotecnologia trabalha com seres vivos.'},
+     {t:'Pedra lascada',w:'Pedra lascada é a técnica dos primeiros machados.'},
+     {t:'Máquina a vapor',w:'A máquina a vapor queimava carvão nas primeiras fábricas.'}]}
+  ]},
+{ id:'b14', emoji:'🏆', titulo:'Sala Final: o grande passeio', tema:'Revisão geral misturando tudo', pag:'Un. 10 e 11', cor:'#C0392B', ala:'final',
+  html:`<p class="narrador">Capi diz: "Última sala! Aqui eu misturo perguntas das duas alas. Pense com calma: cada resposta está em uma das salas que você visitou."</p>
+<div class="duas"><div class="regra">🌳 <b>Ala Verde</b><br>meio ambiente · pau-brasil · cana · ouro e café · luz da cidade · água, esgoto e lixo · parques</div>
+<div class="regra azulado">⚙️ <b>Ala das Engenhocas</b><br>tecnologia · machado · cerâmica · engenho e campo · mineração · cidade elétrica</div></div>`,
+  palavras:['revisão das duas alas'],
+  qs:[
+   {q:'O que a busca por ouro em Minas e o cultivo de cana têm em comum, segundo o livro?', o:[
+     {t:'As duas atividades derrubaram mata nativa e usaram mão de obra escravizada',ok:1,w:'Isso! E nas duas os escravizados usavam técnicas que dominavam em suas regiões de origem.'},
+     {t:'As duas preservaram a natureza',w:'Não. As duas causaram grande desmatamento.'},
+     {t:'As duas usavam drones e máquinas modernas',w:'Drones e máquinas são tecnologias de hoje.'},
+     {t:'As duas aconteceram no Oeste Paulista',w:'O ouro foi em Minas Gerais. O Oeste Paulista aparece na história do café.'}]},
+   {q:'Qual par está CERTO (profissional → o que faz)?', o:[
+     {t:'Ferreiro → objetos de metal',ok:1,w:'Certo! O oleiro é que faz cerâmica.'},
+     {t:'Oleiro → objetos de metal',w:'Oleiro faz cerâmica. Metal é com o ferreiro.'},
+     {t:'Motorneiro → ferramentas do engenho',w:'Motorneiro conduzia bondes.'},
+     {t:'Garimpeiro → acender lampiões',w:'Garimpeiro procura ouro e pedras preciosas.'}]},
+   {q:'Qual frase resume o que o livro ensina sobre saneamento básico hoje?', o:[
+     {t:'É um direito em lei, mas nem todos os moradores têm acesso a ele',ok:1,w:'Isso! Nem todos têm rede de esgoto, água encanada, coleta de lixo e eletricidade.'},
+     {t:'Todos os brasileiros já têm todos os serviços',w:'O livro diz que nem todos têm acesso.'},
+     {t:'Não é um direito, é um favor do governo',w:'É um direito garantido pela Constituição e pela Lei 11.445.'},
+     {t:'Só existe nas cidades que têm usina hidrelétrica',w:'Não. Saneamento é um direito de todos, em qualquer município.'}]}
+  ]}
+];
+
+// ----- Mapa Mental: ramos e lacunas (a errada vem de outro ramo do mesmo mapa) -----
+const RAMOS = [
+ {nome:'🌳 Meio ambiente', cor:'#2E8B57', nos:[
+   'Naturais: águas, solo, ar, fauna, flora · Construídos: ruas, praças, sítios arqueológicos.',
+   ['Área de conservação mais comum no município: os ', {id:'L1',certa:'parques públicos',errada:'engenhos'}, '.'],
+   'Constituição de 1988, art. 225: todos devem preservar.']},
+ {nome:'🪵 Pau-brasil', cor:'#C0392B', nos:[
+   ['Primeiro recurso explorado pelos portugueses (1500): o ', {id:'L2',certa:'pau-brasil',errada:'café'}, '.'],
+   'Corante vermelho · mão de obra indígena · litoral destruído.']},
+ {nome:'🍬 Cana-de-açúcar', cor:'#E8A317', nos:[
+   ['Plantar apenas um produto: ', {id:'L3',certa:'monocultura',errada:'biotecnologia'}, '.'],
+   'Desmata → queima → solo sem nutrientes → nova área.']},
+ {nome:'⛏️ Ouro e café', cor:'#8E5BD0', nos:[
+   'Ouro em Minas (1690) · café no Vale do Paraíba (1830: principal exportação).',
+   ['Desgaste do solo que abre buracos: ', {id:'L4',certa:'erosão',errada:'forja'}, '.']]},
+ {nome:'🏮 Luz da cidade', cor:'#F28C28', nos:[
+   ['1794: ruas iluminadas por ', {id:'L5',certa:'lampiões',errada:'bateias'}, ' a óleo (até de baleia).'],
+   '1854 gás · 1883 elétrica · hoje LED · hidrelétricas.']},
+ {nome:'🚰 Água, esgoto e lixo', cor:'#2F80C2', nos:[
+   ['Na colônia, a água ia até os chafarizes pelos ', {id:'L6',certa:'aquedutos',errada:'tornos'}, '.'],
+   'Esgoto em barris · coleta de lixo em 1880 · saneamento é direito.']},
+ {nome:'🏞️ Parques', cor:'#3BA37A', nos:[
+   '1850 Lei de Terras · 1896 primeiro parque (São Paulo).',
+   ['1934: o primeiro ', {id:'L7',certa:'Código Florestal',errada:'Constituição de 1988'}, ' cria parques nacionais, estaduais e municipais.']]},
+ {nome:'📱 Tecnologia', cor:'#5B6CD9', nos:[
+   'Tudo o que o ser humano cria com técnicas para facilitar a vida.',
+   'Antigas (cerâmica, escrita, papel) e atuais (celular, robótica).']},
+ {nome:'🪓 Machado', cor:'#7A5C3E', nos:[
+   ['Machado de mão feito pela técnica da ', {id:'L8',certa:'pedra lascada',errada:'modelagem'}, '.'],
+   'Ferreiro: esquenta, forja e esfria o metal na água.']},
+ {nome:'🏺 Cerâmica', cor:'#B5562E', nos:[
+   'Oleiro · modelagem · olaria = primeiras indústrias · marajoaras.',
+   ['Os jesuítas trouxeram os ', {id:'L9',certa:'tornos',errada:'drones'}, ' e as primeiras olarias.']]},
+ {nome:'🏭 Engenho e campo', cor:'#D4A017', nos:[
+   ['A cana era moída na casa da ', {id:'L10',certa:'moenda',errada:'olaria'}, ' → caldeiras → purgar.'],
+   'Hoje: usinas (açúcar, álcool, etanol) · drones · irrigação por computador.']},
+ {nome:'🪙 Mineração', cor:'#9C6ADE', nos:[
+   ['Africanos da Costa da Mina eram chamados de ', {id:'L11',certa:'mina',errada:'marajoaras'}, '.'],
+   'Bateia · carumbé · canoa (mesa) · capitão do mato.']},
+ {nome:'🚋 Cidade elétrica', cor:'#1E88A8', nos:[
+   'Fábricas a vapor → eletricidade · cinema · imigrantes operários.',
+   ['Quem conduzia o bonde elétrico: os ', {id:'L12',certa:'motorneiros',errada:'garimpeiros'}, '.']]}
+];
+
+// ----- Verdadeiro ou Falso (banco de 26; sorteia 12) -----
+const VF = [
+ {f:'O meio ambiente inclui só a natureza, como rios e florestas.', v:0, e:'Falso. Inclui também o que os seres humanos construíram: ruas, praças, prédios e lugares históricos.'},
+ {f:'Os parques públicos são o exemplo mais comum de área de conservação nos municípios.', v:1, e:'Verdadeiro. Eles protegem a natureza e podem ser visitados para lazer.'},
+ {f:'Os portugueses queriam o pau-brasil por causa do corante vermelho, muito valorizado na Europa.', v:1, e:'Verdadeiro. Ainda não existiam corantes artificiais.'},
+ {f:'Os indígenas usavam o corante do pau-brasil para tingir tecidos e vender aos europeus.', v:0, e:'Falso. Os indígenas tingiam penas de enfeites e objetos de rituais. Tingir tecidos era o interesse dos portugueses.'},
+ {f:'Monocultura é o cultivo de apenas um produto.', v:1, e:'Verdadeiro. Os canaviais e os cafezais eram monoculturas.'},
+ {f:'Nos canaviais da colônia, o solo era cuidado com adubo e irrigação.', v:0, e:'Falso. Não havia adubação nem irrigação, e o solo se desgastava.'},
+ {f:'O pintor Frans Post nasceu na Holanda e pintou paisagens do Brasil.', v:1, e:'Verdadeiro. Ele viveu aqui de 1637 a 1644.'},
+ {f:'Ao fundar as vilas em Minas Gerais, os colonos preservaram as matas.', v:0, e:'Falso. A mata era derrubada, e os troncos viravam carvão.'},
+ {f:'Em 1830, o café já era o principal produto exportado pelo Brasil.', v:1, e:'Verdadeiro. As fazendas ficavam no Vale do Paraíba.'},
+ {f:'A Floresta da Tijuca, no Rio de Janeiro, foi substituída aos poucos por plantações de café.', v:1, e:'Verdadeiro. Depois, parte dela foi replantada, entre 1861 e 1889.'},
+ {f:'A caça às baleias aumentou porque o óleo delas era usado para iluminar vilas e cidades.', v:1, e:'Verdadeiro. O óleo de baleia acendia os lampiões.'},
+ {f:'A iluminação elétrica chegou às ruas antes dos lampiões a gás.', v:0, e:'Falso. Lampiões a gás em 1854; luz elétrica em 1883.'},
+ {f:'As usinas hidrelétricas geram energia queimando carvão.', v:0, e:'Falso. Quem queima carvão é a termelétrica. A hidrelétrica usa a força das águas.'},
+ {f:'Os serviços públicos podem ser feitos pelo governo ou por empresas contratadas por ele.', v:1, e:'Verdadeiro. A população paga taxas por esses serviços.'},
+ {f:'Os aquedutos levavam a água de rios e lagos até chafarizes, bicas e fontes.', v:1, e:'Verdadeiro. Recife e Rio de Janeiro foram as primeiras a fazer isso.'},
+ {f:'O primeiro sistema de tratamento de esgoto do Brasil foi construído em Ouro Preto.', v:1, e:'Verdadeiro. Foi no século XIX, em Minas Gerais.'},
+ {f:'A coleta de lixo existe no Brasil desde 1500.', v:0, e:'Falso. Ela começou em 1880, e o Rio de Janeiro foi a primeira cidade com limpeza urbana.'},
+ {f:'O primeiro Código Florestal, de 1934, criou parques nacionais, estaduais e municipais.', v:1, e:'Verdadeiro. A partir daí os parques passaram a proteger oficialmente o ambiente.'},
+ {f:'Só podem ser consideradas tecnologia as invenções atuais dos seres humanos.', v:0, e:'Falso. Cerâmica, escrita e papel também são tecnologias, só que antigas.'},
+ {f:'As primeiras invenções humanas surgiram da necessidade de alimentação.', v:1, e:'Verdadeiro. O machado de mão servia para caçar e cortar alimentos.'},
+ {f:'O trabalhador que produz objetos de metal é chamado de oleiro.', v:0, e:'Falso. É o ferreiro. O oleiro faz cerâmica.'},
+ {f:'Um dos povos mais antigos a fazer cerâmica no Brasil foi o povo marajoara.', v:1, e:'Verdadeiro. Os marajoaras vêm da Ilha de Marajó, no Pará.'},
+ {f:'Na casa de purgar, a cana era moída para tirar o caldo.', v:0, e:'Falso. A cana era moída na casa da moenda. Na casa de purgar, o melado secava e virava açúcar.'},
+ {f:'Hoje, no Brasil, as usinas produzem açúcar, álcool e etanol.', v:1, e:'Verdadeiro. O etanol é combustível para automóveis.'},
+ {f:'Os escravizados da Costa da Mina eram conhecidos como "minas" porque dominavam a agricultura.', v:0, e:'Falso. Eles dominavam técnicas de mineração e fundição de metais.'},
+ {f:'Antes de serem elétricos, os bondes eram puxados por animais.', v:1, e:'Verdadeiro. Depois passaram a ser elétricos, em trilhos, conduzidos por motorneiros.'}
+];
+
+// ----- Mini-quiz relâmpago do Resumo -----
+const RELAMPAGO = [
+ ['Qual foi o primeiro recurso natural explorado pelos portugueses?', 'O pau-brasil (corante vermelho e madeira).'],
+ ['O que é monocultura?', 'Cultivar apenas um produto (ex.: só cana, só café).'],
+ ['Em que ano começou a iluminação pública com lampiões?', '1794 (lampiões a óleo, até de baleia).'],
+ ['Que usina gera energia com a força das águas?', 'A usina hidrelétrica (ex.: Itaipu).'],
+ ['Onde foi o primeiro sistema de tratamento de esgoto?', 'Em Ouro Preto (MG), no século XIX.'],
+ ['O que os jesuítas trouxeram para a cerâmica?', 'Os tornos, e construíram as primeiras olarias.'],
+ ['Quais são as 3 casas do engenho, na ordem?', 'Casa da moenda → casa das caldeiras → casa de purgar.'],
+ ['Para que servia a bateia?', 'Para lavar e separar o ouro do cascalho (formato de prato fundo).']
+];
+
+// ----- Linha do tempo do Resumo -----
+const LINHA = [
+ ['1500','🪵','Portugueses chegam e exploram o pau-brasil (forte até 1530).'],
+ ['1532','🍬','Começa a produção de açúcar nos engenhos.'],
+ ['1690','⛏️','Começa a busca por ouro em Minas Gerais.'],
+ ['1727','☕','Chegam as primeiras sementes de café.'],
+ ['1750','📉','O ouro começa a diminuir: garimpeiros vão para a lavoura e o gado.'],
+ ['1794','🏮','Primeiros lampiões a óleo nas ruas.'],
+ ['1830','☕','O café já é o principal produto exportado.'],
+ ['1850','📜','Lei de Terras: começam as áreas protegidas.'],
+ ['1854','🔥','Lampiões a gás no Rio e em São Paulo.'],
+ ['1861–1889','🌱','Replantio de parte da Floresta da Tijuca.'],
+ ['1880','🗑️','Começa a coleta de lixo nas cidades.'],
+ ['1883','💡','Iluminação elétrica nas ruas.'],
+ ['1896','🏞️','Primeiro parque para preservar o ambiente (São Paulo).'],
+ ['1934','📗','Primeiro Código Florestal: parques nacionais, estaduais e municipais.'],
+ ['1988','📜','Constituição: meio ambiente equilibrado e saneamento são direitos.'],
+ ['2007','⚖️','Lei 11.445: regras do saneamento básico.']
+];
+
+// ----- Simulado (25 questões inéditas, no estilo das atividades do livro) -----
+// formato: [texto, 1, explicação] = certa ; [texto, explicação] = errada ; d = dica
+const SIM = [
+ {q:'Qual alternativa traz SOMENTE elementos construídos pelos seres humanos?', o:[['Ruas, praças e sítios arqueológicos',1,'Todos foram construídos por pessoas, até os lugares históricos.'],['Rios, solo e ar','São elementos naturais.'],['Fauna, flora e ruas','Fauna e flora são naturais; só a rua é construída.'],['Praças, florestas e rios','Florestas e rios são naturais.']], d:'Natural = águas, solo, ar, fauna e flora. O resto foi construído.'},
+ {q:'O artigo 225 da Constituição de 1988 diz que o meio ambiente deve ser preservado "para as presentes e futuras gerações". Isso quer dizer que devemos cuidar dele:', o:[['Para quem vive hoje e para quem ainda vai nascer',1,'Futuras gerações são as pessoas que ainda vão viver no futuro.'],['Só para os adultos de hoje','O artigo fala também das futuras gerações.'],['Só para os turistas que visitam os parques','O direito é de todos, não só dos turistas.'],['Só até o ano de 1988','O dever continua até hoje e no futuro.']], d:'"Presentes" = hoje; "futuras" = quem vem depois.'},
+ {q:'Os portugueses e os indígenas usavam o pau-brasil de jeitos diferentes. Qual alternativa mostra um uso dos PORTUGUESES?', o:[['Levar a madeira para a Europa e usar o corante para tingir tecidos',1,'Os portugueses queriam lucro: corante para tecidos e madeira para móveis e instrumentos.'],['Tingir penas usadas como enfeite','Isso faziam os indígenas.'],['Fazer arcos e flechas','Arcos e flechas eram feitos pelos indígenas.'],['Tingir objetos usados em rituais religiosos indígenas','Esse era um uso dos indígenas.']], d:'Português = comércio na Europa. Indígena = penas, rituais, moradias, arcos e flechas.'},
+ {q:'Por que, em poucas décadas, o litoral brasileiro foi a área mais atingida pela exploração?', o:[['Porque o pau-brasil foi derrubado em grande quantidade e levado aos navios',1,'De 1500 a 1530 a extração foi muito intensa.'],['Porque os cafezais começaram no litoral em 1727','O café se espalhou depois, no Vale do Paraíba.'],['Porque ali foram construídas as minas de ouro','As minas ficavam em Minas Gerais, no interior.'],['Porque ali foram construídas usinas hidrelétricas','Hidrelétricas são de muito tempo depois.']], d:'Pense na primeira riqueza explorada.'},
+ {q:'Observe a sequência dos canaviais: 1) a mata era derrubada; 2) o terreno era queimado; 3) a cana era plantada sem adubo e sem irrigação. Qual é a etapa seguinte?', o:[['O solo perdia os nutrientes, e novas áreas de mata eram derrubadas',1,'Era um ciclo que destruía cada vez mais mata nativa.'],['O solo ficava mais fértil a cada ano','Sem adubo e irrigação, o solo se desgastava.'],['A mata nativa crescia de novo sozinha','Não. Os colonizadores desmatavam novas áreas.'],['O açúcar era levado para a casa de purgar','Isso é etapa do engenho, não do plantio.']], d:'Sem adubo, o solo "cansa".'},
+ {q:'Uma fazenda colonial plantava somente café, em uma área enorme. Esse modelo se chama:', o:[['Monocultura',1,'Mono = um só produto.'],['Olaria','Olaria é onde se faz cerâmica.'],['Saneamento básico','Saneamento é água, esgoto, lixo e limpeza.'],['Biotecnologia','Biotecnologia mexe em seres vivos, é tecnologia atual.']], d:'Um só produto agrícola.'},
+ {q:'No interior da colônia, durante a mineração, a madeira das árvores derrubadas era transformada em carvão porque:', o:[['O carvão era a única fonte de energia no interior',1,'Por isso a mata era derrubada assim que se achavam novas minas.'],['O carvão servia para tingir tecidos','Corante vinha do pau-brasil.'],['O carvão era vendido como alimento','Carvão não é alimento.'],['O carvão acendia as lâmpadas de LED','LED é tecnologia de hoje.']], d:'Pense em energia.'},
+ {q:'Quais foram consequências do cultivo de café no Vale do Paraíba?', o:[['Destruição da Mata Atlântica, nascentes atingidas e erosão do solo',1,'O livro também cita a perda de fauna e flora.'],['Replantio das florestas e solo mais fértil','Foi o contrário: desmatamento e solo pobre.'],['Construção das primeiras olarias do Brasil','As olarias foram construídas pelos jesuítas.'],['Fim da caça às baleias','A caça às baleias acabou por causa de novas fontes de energia.']], d:'Desmatamento + fogo + solo cansado.'},
+ {q:'Por que o fim da escravidão quase não atrapalhou o café do Oeste Paulista?', o:[['Porque lá já se usava trabalho de imigrantes desde 1847',1,'Além disso, as terras eram mais férteis e havia técnicas melhores.'],['Porque lá não se plantava café','O Oeste Paulista virou o centro do café.'],['Porque lá trabalhavam os garimpeiros','Garimpeiros eram da mineração.'],['Porque lá as máquinas eram movidas a óleo de baleia','O livro não diz isso. O motivo foi o trabalho imigrante.']], d:'Quem trabalhava nas fazendas de lá?'},
+ {q:'Qual é a ordem certa da iluminação das ruas no Brasil?', o:[['Lampiões a óleo (1794) → lampiões a gás (1854) → luz elétrica (1883)',1,'Antes de tudo isso havia só velas.'],['Luz elétrica (1794) → lampiões a gás (1854) → lampiões a óleo (1883)','A luz elétrica foi a última, em 1883.'],['Lampiões a gás (1794) → lampiões a óleo (1854) → luz elétrica (1883)','Primeiro vieram os lampiões a óleo, em 1794.'],['Lampiões a óleo (1883) → luz elétrica (1854) → lampiões a gás (1794)','As datas estão trocadas: óleo 1794, gás 1854, elétrica 1883.']], d:'Óleo → gás → eletricidade.'},
+ {q:'A caça às baleias foi intensa no Brasil, principalmente na Bahia e no Rio de Janeiro. O que fez essa caça ser abandonada aos poucos?', o:[['Novas tecnologias e fontes de energia, como o petróleo',1,'O petróleo substituiu o óleo de baleia.'],['O fim das festas noturnas','O motivo foi a chegada de novas fontes de energia.'],['A construção dos aquedutos','Aquedutos levavam água; não têm relação com as baleias.'],['A criação do Código Florestal','O livro liga o fim da caça às novas fontes de energia.']], d:'O que substituiu o óleo de baleia?'},
+ {q:'Quando a energia elétrica chegou às grandes cidades brasileiras, o que mudou no dia a dia?', o:[['Surgiram os bondes elétricos e a luz nas ruas, e as pessoas passaram a sair à noite para o cinema e o teatro',1,'A eletricidade modernizou as cidades e atraiu muitos moradores.'],['As ruas passaram a ser iluminadas por velas nas fachadas','Velas eram do tempo antes da iluminação pública.'],['As moendas passaram a ser movidas por animais','Moendas movidas por animais eram dos engenhos antigos.'],['A água passou a chegar por aquedutos','Aquedutos eram do período colonial.']], d:'Pense em bonde, luz e lazer noturno.'},
+ {q:'Na usina termelétrica, como a energia é produzida?', o:[['O carvão é queimado, a água vira vapor e o vapor gira as turbinas',1,'Foi uma termelétrica que levou a luz elétrica a Campos (RJ).'],['A força das águas de um rio gira as turbinas','Isso é a hidrelétrica.'],['O óleo de baleia é queimado nos lampiões','Isso era a iluminação de 1794.'],['O vento seca o melado','Isso lembra a casa de purgar do engenho.']], d:'"Termo" lembra calor.'},
+ {q:'A população paga taxas pelos serviços públicos. Para que serve esse dinheiro?', o:[['Para pagar os salários dos trabalhadores e outras despesas dos serviços',1,'Os serviços precisam de gente fazendo manutenção.'],['Para comprar ouro em Minas Gerais','O livro não diz isso.'],['Para pagar os escravizados que carregavam barris','Escravizados não recebiam pagamento; eram explorados.'],['Para construir engenhos de açúcar','O dinheiro das taxas paga os serviços públicos.']], d:'Quem faz a manutenção precisa receber.'},
+ {q:'No tempo da colônia, como a água chegava à população de Recife e do Rio de Janeiro?', o:[['Por aquedutos que levavam a água até chafarizes, bicas e fontes públicas',1,'Os aquedutos eram construídos perto de rios, lagos e lagoas.'],['Por canos até a torneira de cada casa','Isso é a rede de abastecimento de hoje.'],['Em caminhões-pipa','O livro fala dos aquedutos.'],['Pelas estações de tratamento de esgoto','Essas tratam a água já usada.']], d:'Chafariz = fonte pública.'},
+ {q:'O que acontecia com o esgoto nas cidades antes do primeiro sistema de tratamento, construído em Ouro Preto?', o:[['Pessoas escravizadas o levavam em barris e despejavam em rios e no mar',1,'Era um trabalho forçado, e sujava as águas.'],['Era tratado nas estações e voltava limpo aos rios','Isso só passou a acontecer depois.'],['Era guardado nos chafarizes','Chafarizes eram fontes de água limpa.'],['Era queimado nos fornos das olarias','O livro não diz isso.']], d:'Pense em barris.'},
+ {q:'Um viajante escreveu que as ruas de uma cidade antiga viviam cheias de lixo. Segundo o livro, qual era o perigo disso?', o:[['O lixo atraía ratos, baratas e moscas, espalhando doenças',1,'Por isso a coleta de lixo, a partir de 1880, foi tão importante.'],['O lixo apagava os lampiões','O perigo era para a saúde: doenças.'],['O lixo virava adubo para os cafezais','O livro fala de doenças.'],['O lixo atraía baleias para o litoral','Não faz sentido. O problema eram as doenças.']], d:'Bichos que transmitem doenças.'},
+ {q:'Qual destes NÃO faz parte do saneamento básico?', o:[['Fabricação de potes de cerâmica nas olarias',1,'Cerâmica é trabalho do oleiro, não é serviço de saneamento.'],['Abastecimento de água potável','Faz parte do saneamento.'],['Coleta e tratamento de esgoto','Faz parte do saneamento.'],['Controle de pragas','Faz parte do saneamento.']], d:'Saneamento: água, esgoto, limpeza, lixo, pragas, água da chuva.'},
+ {q:'Hoje, para que servem as áreas de conservação ambiental nos municípios?', o:[['Preservar a natureza, fazer pesquisas, produzir água doce e dar qualidade de vida',1,'Esses são os principais objetivos, segundo o livro.'],['Plantar cana em monocultura','Isso destrói a natureza.'],['Extrair ouro e pedras preciosas','Isso é mineração.'],['Guardar o lixo da cidade','O lixo é recolhido pela coleta.']], d:'Conservação = proteger.'},
+ {q:'Segundo o livro, qual frase está CORRETA sobre tecnologia?', o:[['A escrita, o papel e a cerâmica também são tecnologias',1,'Toda criação humana feita com técnicas é tecnologia.'],['Tecnologia é só o que funciona com eletricidade','Cerâmica e escrita não usam eletricidade e são tecnologia.'],['As primeiras tecnologias foram os computadores','As primeiras foram o machado de mão e a cerâmica.'],['O ser humano parou de criar tecnologias','Criamos tecnologias até hoje, como a robótica.']], d:'Tecnologias antigas também contam.'},
+ {q:'Um homem aquece o ferro no fogo, bate no metal quente para dar forma e depois o coloca na água fria. Qual é a profissão dele?', o:[['Ferreiro',1,'O ferreiro produz objetos de metal.'],['Oleiro','O oleiro trabalha com argila.'],['Motorneiro','O motorneiro conduzia bondes.'],['Garimpeiro','O garimpeiro procura ouro.']], d:'Ferro → ferreiro.'},
+ {q:'Na olaria, depois de o barro ser peneirado e amassado com água até virar pasta, o que acontece?', o:[['A pasta descansa e depois ganha forma no torno',1,'Depois vêm a secagem, o forno e a pintura.'],['A peça é pintada e decorada','A pintura é a última etapa.'],['A peça vai direto para o forno','Antes do forno, ela recebe forma e seca.'],['O barro é peneirado de novo','A peneira já foi a 1ª etapa.']], d:'Peneirar → amassar → descansar → torno → secar → forno → pintar.'},
+ {q:'Associe: no engenho, a "casa de purgar" era o lugar onde...', o:[['...o melado secava e virava açúcar',1,'É a última etapa do engenho.'],['...a cana era moída para tirar o caldo','Isso era na casa da moenda.'],['...o caldo era cozido em grandes tachos','Isso era na casa das caldeiras.'],['...o barro era queimado','Isso é na olaria.']], d:'Moenda → caldeiras → purgar.'},
+ {q:'Qual destas é uma tecnologia usada hoje no campo, segundo o livro?', o:[['Drones que pulverizam e vigiam as plantações',1,'O livro cita também irrigação por computador e tablets.'],['Moenda movida por animais','Isso era dos engenhos antigos.'],['Queimada para limpar o terreno','Era uma técnica antiga que destruía a mata.'],['Bateia para separar o cascalho','Bateia é da mineração antiga.']], d:'Tecnologia atual.'},
+ {q:'Qual foi a importância dos africanos escravizados da Costa da Mina para a mineração no Brasil?', o:[['Trouxeram técnicas e tecnologias, como a bateia e o carumbé, que tiravam mais ouro em menos tempo',1,'Antes, o ouro era tirado com pedaços de madeira e pratos.'],['Inventaram a máquina a vapor','A máquina a vapor era das primeiras fábricas.'],['Construíram os aquedutos de Recife','O livro não diz isso.'],['Ensinaram os jesuítas a usar o torno','O torno foi trazido da Europa pelos jesuítas.']], d:'Pense em bateia e carumbé.'}
+];
+
+const ALAS = {verde:'🌳 Ala Verde — Unidade 10: Os municípios e o meio ambiente', engenhocas:'⚙️ Ala das Engenhocas — Unidade 11: O trabalho e a tecnologia', final:'🏆 Saída do museu — revisão geral'};
+// ===================== LÓGICA =====================
+const SLUG = 'hist3museu';
+const SEED_LEIT = 11, SEED_SIM = 7, SEED_MAPA = 3;
+const K = { leitura:SLUG+'_leitura_v1', mapa:SLUG+'_mapa_v1', vf:SLUG+'_vf_v1', resumo:SLUG+'_resumo_v1', simulado:SLUG+'_simulado_v1', trilha:SLUG+'_trilha_v1' };
+const CODIGO_PAIS = 'PAIS-77';
+const MEM = {};
+function ler(k){ try{ const v = localStorage.getItem(k); if(v!==null) return JSON.parse(v); }catch(e){} return MEM[k] ? JSON.parse(MEM[k]) : null; }
+function gravar(k,o){ const s = JSON.stringify(o); MEM[k] = s; try{ localStorage.setItem(k,s); }catch(e){} }
+function apagar(k){ delete MEM[k]; try{ localStorage.removeItem(k); }catch(e){} }
+
+let S = {};
+function carregar(){
+  S.leitura  = ler(K.leitura)  || {resp:{}, concluido:false};
+  S.mapa     = ler(K.mapa)     || {pecas:{}, concluido:false};
+  S.vf       = ler(K.vf)       || {melhor:null, rodadas:0, historico:[], concluido:false};
+  S.resumo   = ler(K.resumo)   || {maxRolagem:0, concluido:false};
+  S.simulado = ler(K.simulado) || {resp:{}, enviado:false, concluido:false};
+  S.trilha   = ler(K.trilha)   || {liberadoPelosPais:false, liberadoEm:null, vistos:{}, historico:[]};
+  if(!S.trilha.vistos) S.trilha.vistos = {};
+  if(!S.trilha.historico) S.trilha.historico = [];
+}
+function salvar(nome){ S[nome].salvoEm = new Date().toISOString(); gravar(K[nome], S[nome]); atualizarPainel(); renderTrilha(); }
+function concluir(nome){ if(!S[nome].concluido){ S[nome].concluido = true; S[nome].concluidoEm = new Date().toISOString(); } }
+
+// ---------- utilidades ----------
+function hashStr(s){ let h = 2166136261; for(let i=0;i<s.length;i++){ h ^= s.charCodeAt(i); h = Math.imul(h,16777619); } return h>>>0; }
+function mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+function embaralhar(arr, seed){ const r = mulberry32(seed); const a = arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(r()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function dataBR(iso){ if(!iso) return '—'; const d=new Date(iso); const p=n=>String(n).padStart(2,'0'); return `${p(d.getDate())}/${p(d.getMonth()+1)}/${d.getFullYear()} ${p(d.getHours())}:${p(d.getMinutes())}`; }
+const $ = id => document.getElementById(id);
+const LETRAS = ['a','b','c','d'];
+
+// ---------- modal ----------
+function abrirModal(html, botoes){
+  const m = $('modal'); m.innerHTML = html + '<div style="margin-top:14px" id="modalBts"></div>';
+  (botoes||[{t:'OK', cls:'btn'}]).forEach(b=>{ const el=document.createElement('button'); el.className=b.cls||'btn'; el.textContent=b.t; el.onclick=()=>{ fecharModal(); if(b.fn) b.fn(); }; $('modalBts').appendChild(el); });
+  $('fundoModal').classList.add('aberto');
+}
+function fecharModal(){ $('fundoModal').classList.remove('aberto'); }
+
+// ---------- trilha ----------
+const ETAPAS = [
+  {id:'leitura', nome:'Leitura Guiada', ic:'📖'},
+  {id:'mapa', nome:'Mapa Mental para encaixar', ic:'🧠'},
+  {id:'vf', nome:'Verdadeiro ou Falso', ic:'✅'},
+  {id:'resumo', nome:'Resumo', ic:'🗺️'},
+  {id:'simulado', nome:'Simulado', ic:'📝'}
+];
+const idxEtapa = id => ETAPAS.findIndex(e=>e.id===id);
+function feito(id){ return !!(S[id] && S[id].concluido); }
+function aberta(i){ if(i<=0) return true; if(S.trilha.liberadoPelosPais) return true; return feito(ETAPAS[i-1].id) || feito(ETAPAS[i].id); }
+const TOTAL_PERG = BLOCOS.reduce((s,b)=>s+b.qs.length,0);
+function blocoFeito(b){ return b.qs.every((q,qi)=>S.leitura.resp[b.id+'_'+qi]); }
+function blocosFeitos(){ return BLOCOS.filter(blocoFeito).length; }
+const PECAS = []; RAMOS.forEach(r=>r.nos.forEach(n=>{ if(Array.isArray(n)) n.forEach(p=>{ if(typeof p==='object') PECAS.push(p); }); }));
+const TOTAL_PECAS = PECAS.length;
+function pecasFeitas(){ return PECAS.filter(p=>S.mapa.pecas[p.id] && S.mapa.pecas[p.id].feita).length; }
+function faltaTexto(i){
+  const ant = ETAPAS[i-1].id;
+  if(ant==='leitura') return `Destrava quando você terminar as ${BLOCOS.length} salas da Leitura Guiada (faltam ${BLOCOS.length-blocosFeitos()}).`;
+  if(ant==='mapa') return `Destrava quando você encaixar as ${TOTAL_PECAS} peças do Mapa Mental (faltam ${TOTAL_PECAS-pecasFeitas()}).`;
+  if(ant==='vf') return 'Destrava quando você jogar uma rodada completa (12 frases) do Verdadeiro ou Falso.';
+  if(ant==='resumo') return 'Destrava quando você ler o Resumo até o fim e clicar em "✅ Li o resumo até o fim".';
+  return '';
+}
+function ehNova(i){ return i>0 && aberta(i) && !feito(ETAPAS[i].id) && !S.trilha.vistos[ETAPAS[i].id]; }
+
+let abaAtual = 'inicio';
+function renderAbas(){
+  const nav = $('abas'); nav.innerHTML = '';
+  const todas = [{id:'inicio', nome:'Início', ic:'🏠'}].concat(ETAPAS);
+  todas.forEach(a=>{
+    const i = idxEtapa(a.id); const b = document.createElement('button');
+    b.innerHTML = `${a.ic} ${a.nome}`;
+    if(a.id===abaAtual) b.classList.add('ativa');
+    if(i>=0 && !aberta(i)){ b.classList.add('trancada'); b.innerHTML = `🔒 ${a.nome}`; b.title = faltaTexto(i); }
+    else if(i>=0 && feito(a.id)) b.innerHTML += ' <span class="selo">✅</span>';
+    else if(i>=0 && ehNova(i)) b.innerHTML += ' <span class="selo">✨ Novo</span>';
+    b.onclick = ()=>ir(a.id);
+    nav.appendChild(b);
+  });
+}
+function renderTrilha(){
+  const box = $('trilhaCards'); if(!box) return; box.innerHTML = '';
+  if(S.trilha.liberadoPelosPais){ const s=document.createElement('div'); s.className='caixa'; s.innerHTML='🔓 <b>Trilha liberada pelos pais</b> em '+dataBR(S.trilha.liberadoEm); box.appendChild(s); }
+  ETAPAS.forEach((e,i)=>{
+    const b = document.createElement('button'); b.className='etapa';
+    let status;
+    if(!aberta(i)){ b.classList.add('trancada'); status = `<span class="tag lock">🔒 Trancado</span><div class="sub">${faltaTexto(i)}</div>`; }
+    else if(feito(e.id)){ b.classList.add('feita'); status = `<span class="tag ok">✅ Concluído</span><div class="sub">em ${dataBR(S[e.id].concluidoEm)}</div>`; }
+    else if(ehNova(i)){ b.classList.add('nova'); status = `<span class="tag novo">✨ Novo destravado</span>`; }
+    else status = `<span class="sub">${i===0?'Comece por aqui!':'Aberto'}</span>`;
+    b.innerHTML = `<span class="ic">${e.ic}</span><span><b>${i+1}. ${e.nome}</b> ${status}</span>`;
+    b.onclick = ()=>ir(e.id);
+    box.appendChild(b);
+  });
+  renderAbas(); renderProximos();
+}
+function renderProximos(){
+  document.querySelectorAll('[data-proximo]').forEach(bt=>{
+    const i = idxEtapa(bt.dataset.proximo);
+    const ok = aberta(i);
+    bt.disabled = !ok;
+    if(!bt.dataset.rotulo) bt.dataset.rotulo = bt.textContent;
+    bt.textContent = ok ? bt.dataset.rotulo : '🔒 ' + bt.dataset.rotulo.replace(/^\S+\s/,'');
+    bt.title = ok ? '' : faltaTexto(i);
+    bt.onclick = ()=>ir(bt.dataset.proximo);
+  });
+}
+function modalTrancada(i){
+  abrirModal(`<div class="trofeu">🔒</div><h2>Esta etapa ainda está trancada</h2><p>Para abrir <b>${ETAPAS[i].nome}</b>, conclua antes <b>${ETAPAS[i-1].nome}</b>.</p><p>${faltaTexto(i)}</p>`,
+    [{t:'Ir para '+ETAPAS[i-1].nome, cls:'btn', fn:()=>ir(ETAPAS[i-1].id)},{t:'Voltar ao início', cls:'btn claro', fn:()=>ir('inicio')}]);
+}
+function ir(id){
+  const i = idxEtapa(id);
+  if(id!=='inicio' && i<0) id='inicio';
+  if(i>=0 && !aberta(i)){ modalTrancada(i); return; }
+  abaAtual = id;
+  document.querySelectorAll('section.aba').forEach(s=>s.classList.toggle('ativa', s.id==='sec-'+id));
+  if(i>=0 && !S.trilha.vistos[id]){ S.trilha.vistos[id] = new Date().toISOString(); gravar(K.trilha, S.trilha); }
+  renderTrilha();
+  window.scrollTo(0,0);
+  if(id==='resumo') setTimeout(medirRolagem, 300);
+}
+
+// ---------- LEITURA ----------
+const fechados = {};
+function opcoesDe(q, seed){ return embaralhar(q.o.map((o,k)=>Object.assign({k}, o)), seed); }
+function renderLeitura(){
+  const box = $('blocosLeitura'); box.innerHTML = '';
+  let anteriorFeito = true;
+  BLOCOS.forEach((b,j)=>{
+    if(j===0 || BLOCOS[j-1].ala!==b.ala){ const t=document.createElement('div'); t.className='ala-tit '+b.ala; t.innerHTML=ALAS[b.ala]; box.appendChild(t); }
+    const liberado = anteriorFeito; const completo = blocoFeito(b);
+    const d = document.createElement('div');
+    d.className = 'card bloco' + (liberado?'':' trancado') + (fechados[b.id]?' fechado':'');
+    d.style.setProperty('--c', b.cor); d.id = 'bloco-'+b.id;
+    let cab = `<div class="cab"><div><h2 style="color:${b.cor}">${b.emoji} ${j+1}. ${b.titulo}</h2><div class="sub">${b.tema} · ${b.pag}</div></div><div>${completo?'<span class="bilhete">🎟️ visitada</span>':(liberado?'':'<span class="tag lock">🔒</span>')}</div></div>`;
+    if(!liberado){ d.innerHTML = cab + `<p class="sub">🔒 Abre quando você responder às 3 perguntas da sala ${j}.</p>`; box.appendChild(d); anteriorFeito=false; return; }
+    let corpo = `<div class="corpo">${b.html}<div class="caixa">🔑 <b>Palavras importantes:</b> ${b.palavras.join(' · ')}</div><h3>🎯 Responda as 3 perguntas</h3>`;
+    b.qs.forEach((q,qi)=>{
+      const qid = b.id+'_'+qi; const r = S.leitura.resp[qid];
+      const ops = opcoesDe(q, hashStr(qid)+SEED_LEIT);
+      corpo += `<div class="pergunta"><b>${qi+1}) ${q.q}</b><div class="opcoes">`;
+      ops.forEach((o,pi)=>{
+        let cls = 'op';
+        if(r){ if(o.ok) cls+=' certa'; else if(o.k===r.esc) cls+=' errada'; else cls+=' cinza'; }
+        corpo += `<button class="${cls}" ${r?'disabled':''} data-q="${qid}" data-k="${o.k}">${LETRAS[pi]}) ${o.t}</button>`;
+      });
+      corpo += `</div>`;
+      if(r){ const esc = q.o[r.esc]; const certa = q.o.find(o=>o.ok);
+        corpo += r.ok ? `<div class="fb ok">🎉 ${esc.w}</div>` : `<div class="fb no">💭 Quase! ${esc.w}<br>✔️ <b>Resposta certa:</b> ${certa.t} — ${certa.w}</div>`; }
+      corpo += `</div>`;
+    });
+    corpo += `</div>`;
+    d.innerHTML = cab + corpo; box.appendChild(d);
+    d.querySelector('.cab').onclick = ()=>{ fechados[b.id] = !fechados[b.id]; d.classList.toggle('fechado'); };
+    anteriorFeito = completo;
+  });
+  box.querySelectorAll('button.op').forEach(bt=>bt.onclick = ()=>responderLeitura(bt.dataset.q, +bt.dataset.k));
+  const resp = Object.keys(S.leitura.resp).length; const acertos = Object.values(S.leitura.resp).filter(r=>r.ok).length;
+  $('barraLeitura').style.width = (resp/TOTAL_PERG*100)+'%';
+  $('txtLeitura').innerHTML = `${resp} de ${TOTAL_PERG} perguntas respondidas · ⭐ ${acertos} acertos · ${blocosFeitos()} de ${BLOCOS.length} salas`;
+  $('fimLeitura').style.display = S.leitura.concluido ? 'block' : 'none';
+}
+function responderLeitura(qid, k){
+  if(S.leitura.resp[qid]) return;
+  const [bid, qi] = qid.split('_'); const b = BLOCOS.find(x=>x.id===bid); const q = b.qs[+qi];
+  S.leitura.resp[qid] = {esc:k, ok:!!q.o[k].ok, em:new Date().toISOString()};
+  const fimAgora = !S.leitura.concluido && Object.keys(S.leitura.resp).length===TOTAL_PERG;
+  if(fimAgora) concluir('leitura');
+  salvar('leitura'); renderLeitura();
+  if(fimAgora) abrirModal('<div class="trofeu">🏆</div><h2>Leitura concluída!</h2><p>Você visitou todas as salas do museu. O <b>Mapa Mental</b> foi destravado! ✨</p>', [{t:'🧠 Ir para o Mapa Mental', cls:'btn', fn:()=>ir('mapa')},{t:'Ficar aqui', cls:'btn claro'}]);
+}
+
+// ---------- MAPA MENTAL ----------
+function renderMapa(){
+  const box = $('ramosMapa'); box.innerHTML = '';
+  RAMOS.forEach(r=>{
+    const d = document.createElement('div'); d.className='ramo'; d.style.setProperty('--c', r.cor);
+    let h = `<h4>${r.nome}</h4>`;
+    r.nos.forEach(n=>{
+      if(typeof n==='string'){ h += `<div class="no">• ${n}</div>`; return; }
+      h += '<div class="no">• ' + n.map(p=>{
+        if(typeof p==='string') return p;
+        const st = S.mapa.pecas[p.id];
+        if(st && st.feita) return `<span class="lacuna feita"><span>${p.certa}</span></span>`;
+        const ops = embaralhar([p.certa, p.errada], hashStr(p.id)+SEED_MAPA);
+        return `<span class="lacuna">` + ops.map(o=>`<button data-p="${p.id}" data-v="${o}">${o}</button>`).join('<span style="align-self:center">ou</span>') + `</span>`;
+      }).join('') + '</div>';
+    });
+    d.innerHTML = h; box.appendChild(d);
+  });
+  box.querySelectorAll('.lacuna button').forEach(bt=>bt.onclick = ()=>encaixar(bt));
+  const f = pecasFeitas();
+  $('contadorMapa').textContent = f===TOTAL_PECAS ? '🧠 Mapa completo!' : `🧩 Mapa: ${f} de ${TOTAL_PECAS} peças encaixadas`;
+  $('mapa').classList.toggle('incompleto', f<TOTAL_PECAS);
+  $('mapa').classList.toggle('completo', f===TOTAL_PECAS);
+  $('mapaFim').style.display = f===TOTAL_PECAS ? 'block' : 'none';
+}
+function encaixar(bt){
+  const p = PECAS.find(x=>x.id===bt.dataset.p); const st = S.mapa.pecas[p.id] || {feita:false, tentou:false};
+  if(bt.dataset.v===p.certa){
+    st.feita = true; st.deprimeira = !st.tentou; st.em = new Date().toISOString(); S.mapa.pecas[p.id] = st;
+    const fimAgora = !S.mapa.concluido && pecasFeitas()===TOTAL_PECAS;
+    if(fimAgora) concluir('mapa');
+    salvar('mapa'); renderMapa();
+    if(fimAgora) abrirModal('<div class="trofeu">🧠</div><h2>Mapa completo!</h2><p>Você montou o mapa inteiro. O <b>Verdadeiro ou Falso</b> foi destravado! ✨</p>', [{t:'✅ Jogar Verdadeiro ou Falso', cls:'btn', fn:()=>ir('vf')},{t:'Ver o mapa', cls:'btn claro'}]);
+  } else {
+    st.tentou = true; S.mapa.pecas[p.id] = st; salvar('mapa');
+    bt.classList.remove('erro'); void bt.offsetWidth; bt.classList.add('erro');
+  }
+}
+
+// ---------- VERDADEIRO OU FALSO ----------
+let rodada = null;
+function novaRodada(){ const idx = embaralhar(VF.map((_,i)=>i), (Math.random()*1e9)>>>0).slice(0,12); rodada = {itens:idx, i:0, acertos:0, respondida:null}; renderVF(); }
+function estrelas(pct){ const n = Math.round(pct/20); return '⭐'.repeat(n) + '☆'.repeat(5-n); }
+function renderVF(){
+  const box = $('vfJogo');
+  if(!rodada){
+    box.innerHTML = `<h2>✅ Verdadeiro ou Falso</h2><p>Vou mostrar <b>12 frases</b> sobre o museu. Para cada uma, diga se é <b>Verdadeira</b> ou <b>Falsa</b>. Depois de cada resposta aparece a explicação.</p>
+      ${S.vf.melhor!==null?`<p>🏅 Seu melhor placar: <b>${S.vf.melhor}%</b> ${estrelas(S.vf.melhor)} · rodadas jogadas: ${S.vf.rodadas}</p>`:''}
+      <div style="text-align:center"><button class="btn loco" id="btVfComecar">▶️ Começar rodada</button></div>`;
+    $('btVfComecar').onclick = novaRodada; return;
+  }
+  if(rodada.i >= rodada.itens.length){
+    const pct = Math.round(rodada.acertos/rodada.itens.length*100);
+    box.innerHTML = `<div class="placar-final"><div class="trofeu">🏆</div><h2>Rodada completa!</h2><p>Você acertou <b>${rodada.acertos} de ${rodada.itens.length}</b> — <b>${pct}%</b></p><p class="estrelas">${estrelas(pct)}</p><p>🏅 Melhor placar: ${S.vf.melhor}%</p>
+      <button class="btn azul" id="btVfDeNovo">🔁 Jogar de novo</button> <button class="btn loco" id="btVfResumo">🗺️ Agora revise no Resumo!</button></div>`;
+    $('btVfDeNovo').onclick = novaRodada; $('btVfResumo').onclick = ()=>ir('resumo'); return;
+  }
+  const it = VF[rodada.itens[rodada.i]];
+  let h = `<div class="sub">Frase ${rodada.i+1} de ${rodada.itens.length} · ✔️ ${rodada.acertos} acertos</div><div class="barra"><div style="width:${rodada.i/rodada.itens.length*100}%"></div></div>
+    <div class="vf-frase">"${it.f}"</div>`;
+  if(rodada.respondida===null){
+    h += `<div class="vf-bts"><button class="btn" id="btV">👍 Verdadeiro</button><button class="btn loco" id="btF">👎 Falso</button></div>`;
+    box.innerHTML = h; $('btV').onclick = ()=>responderVF(1); $('btF').onclick = ()=>responderVF(0);
+  } else {
+    const acertou = rodada.respondida===it.v;
+    h += `<div class="fb ${acertou?'ok':'no'}">${acertou?'🎉 Acertou!':'💭 Não foi dessa vez.'} ${it.e}</div><div style="text-align:center;margin-top:10px"><button class="btn azul" id="btVfProx">${rodada.i+1<rodada.itens.length?'➡️ Próxima frase':'🏁 Ver resultado'}</button></div>`;
+    box.innerHTML = h; $('btVfProx').onclick = ()=>{ rodada.i++; rodada.respondida=null; if(rodada.i>=rodada.itens.length) fimRodada(); renderVF(); };
+  }
+}
+function responderVF(v){ const it = VF[rodada.itens[rodada.i]]; rodada.respondida = v; if(v===it.v) rodada.acertos++; renderVF(); }
+function fimRodada(){
+  const pct = Math.round(rodada.acertos/rodada.itens.length*100);
+  S.vf.rodadas = (S.vf.rodadas||0)+1; S.vf.melhor = Math.max(S.vf.melhor||0, pct);
+  S.vf.historico = (S.vf.historico||[]).concat([{pct, em:new Date().toISOString()}]).slice(-20);
+  const primeira = !S.vf.concluido; concluir('vf'); salvar('vf');
+  if(primeira) setTimeout(()=>abrirModal('<div class="trofeu">🗺️</div><h2>Resumo destravado!</h2><p>Agora revise tudo no <b>Resumo</b> antes do Simulado.</p>', [{t:'🗺️ Ir para o Resumo', cls:'btn', fn:()=>ir('resumo')},{t:'Ficar aqui', cls:'btn claro'}]), 200);
+}
+
+// ---------- RESUMO ----------
+function renderResumo(){
+  $('linhaTempo').innerHTML = LINHA.map(x=>`<div class="parada"><span class="ano">${x[0]}</span><span class="ic">${x[1]}</span><div>${x[2]}</div></div>`).join('');
+  $('relampago').innerHTML = RELAMPAGO.map((r,i)=>`<button class="op" data-r="${i}">⚡ ${r[0]}</button><div class="resp-oculta" id="rel${i}">👉 ${r[1]}</div>`).join('');
+  document.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{ const el=$('rel'+b.dataset.r); el.style.display = el.style.display==='block'?'none':'block'; });
+  atualizarBotaoResumo();
+}
+function medirRolagem(){
+  if(abaAtual!=='resumo') return;
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = h<=0 ? 100 : Math.min(100, Math.round(window.scrollY/h*100));
+  if(pct > (S.resumo.maxRolagem||0)){ S.resumo.maxRolagem = pct; salvar('resumo'); }
+  atualizarBotaoResumo();
+}
+function atualizarBotaoResumo(){
+  const bt = $('btLiResumo'); const pode = S.resumo.concluido || (S.resumo.maxRolagem||0) >= 90;
+  bt.disabled = !pode || S.resumo.concluido;
+  bt.textContent = S.resumo.concluido ? '✅ Resumo lido!' : '✅ Li o resumo até o fim';
+  $('txtLiResumo').textContent = S.resumo.concluido ? 'Concluído em '+dataBR(S.resumo.concluidoEm)+'. O Simulado está aberto!' : (pode ? 'Pode clicar!' : 'O botão acende quando você chegar ao fim da página.');
+}
+function liResumo(){
+  if(S.resumo.concluido) return;
+  concluir('resumo'); salvar('resumo'); atualizarBotaoResumo();
+  abrirModal('<div class="trofeu">📝</div><h2>Simulado destravado!</h2><p>Agora é hora de mostrar o que aprendeu. Boa sorte, jovem aprendiz!</p>', [{t:'📝 Ir para o Simulado', cls:'btn', fn:()=>ir('simulado')},{t:'Revisar mais um pouco', cls:'btn claro'}]);
+}
+
+// ---------- SIMULADO ----------
+function opsSim(qi){ const q = SIM[qi]; const base = q.o.map((o,k)=>({k, t:o[0], ok:o.length===3, w:o.length===3?o[2]:o[1]})); return embaralhar(base, hashStr('sim'+qi)+SEED_SIM); }
+function renderSimulado(){
+  const box = $('questoesSim'); box.innerHTML = '';
+  SIM.forEach((q,qi)=>{
+    const d = document.createElement('div'); d.className = 'card';
+    const r = S.simulado.resp[qi];
+    let h = `<b>Questão ${qi+1}.</b> ${q.q}<div class="opcoes" style="margin-top:8px">`;
+    opsSim(qi).forEach((o,pi)=>{
+      let cls='op'; if(r===o.k) cls+=' sel';
+      if(S.simulado.enviado){ cls='op'+(o.ok?' certa':(r===o.k?' errada':' cinza')); }
+      h += `<button class="${cls}" ${S.simulado.enviado?'disabled':''} data-sq="${qi}" data-k="${o.k}">${LETRAS[pi]}) ${o.t}</button>`;
+    });
+    d.innerHTML = h + '</div>'; box.appendChild(d);
+  });
+  if(!S.simulado.enviado) box.querySelectorAll('[data-sq]').forEach(b=>b.onclick=()=>{ S.simulado.resp[b.dataset.sq] = +b.dataset.k; salvar('simulado'); renderSimulado(); });
+  const n = Object.keys(S.simulado.resp).length;
+  $('barraSim').style.width = (n/SIM.length*100)+'%';
+  $('txtSim').textContent = S.simulado.enviado ? `Enviado em ${dataBR(S.simulado.enviadoEm)}` : `${n} de ${SIM.length} respondidas`;
+  $('envioSim').style.display = S.simulado.enviado ? 'none' : 'block';
+  renderResultado();
+}
+function gerarCodigo(ac){ const L='ABCDEFGHJKLMNPQRSTUVWXYZ'; const r=()=>L[Math.floor(Math.random()*L.length)]; return `SIM-${String(ac).padStart(2,'0')}-${r()}${r()}`; }
+function enviarSim(){
+  const falta = SIM.map((_,i)=>i).filter(i=>S.simulado.resp[i]===undefined);
+  if(falta.length){ abrirModal(`<div class="trofeu">✏️</div><h2>Ainda faltam ${falta.length} questões</h2><p>Responda as questões: <b>${falta.map(i=>i+1).join(', ')}</b>.</p>`); return; }
+  abrirModal('<h2>Enviar o Simulado?</h2><p>Depois de enviar, não dá para mudar as respostas.</p>', [{t:'📨 Enviar', cls:'btn loco', fn:confirmarEnvio},{t:'Revisar antes', cls:'btn claro'}]);
+}
+function confirmarEnvio(){
+  let ac = 0; SIM.forEach((q,qi)=>{ if(q.o[S.simulado.resp[qi]].length===3) ac++; });
+  S.simulado.acertos = ac; S.simulado.enviado = true; S.simulado.enviadoEm = new Date().toISOString();
+  if(!S.simulado.codigo) S.simulado.codigo = gerarCodigo(ac);
+  concluir('simulado'); salvar('simulado'); renderSimulado();
+  setTimeout(()=>{ const el=$('resultadoSim'); if(el) el.scrollIntoView({behavior:'smooth'}); }, 100);
+}
+function renderResultado(){
+  const box = $('resultadoSim');
+  if(!S.simulado.enviado){ box.innerHTML=''; return; }
+  const ac = S.simulado.acertos; const pct = Math.round(ac/SIM.length*100);
+  let h = `<div class="card placar-final"><div class="trofeu">${pct>=70?'🏆':'💪'}</div><h2>Você acertou ${ac} de ${SIM.length} (${pct}%)</h2><p class="estrelas">${estrelas(pct)}</p>
+    <p>${pct>=70?'Mandou muito bem!':'Continue treinando: releia o Resumo e confira o gabarito abaixo.'}</p>
+    <p>Seu código para os pais: <b style="font-size:1.3em;color:var(--trilho2)">${S.simulado.codigo}</b></p></div>
+    <div class="card"><h2>📗 Gabarito comentado</h2><p class="sub">A certa aparece em verde. As outras aparecem em cinza, com a explicação do erro. A sua resposta tem contorno roxo.</p>`;
+  SIM.forEach((q,qi)=>{
+    const r = S.simulado.resp[qi]; const ops = opsSim(qi); const acertou = q.o[r].length===3;
+    h += `<div class="gab-q"><b>${acertou?'✅':'❌'} Questão ${qi+1}.</b> ${q.q}`;
+    ops.forEach((o,pi)=>{ h += `<div class="gab-op ${o.ok?'certa':'cinza'} ${r===o.k?'marcada':''}">${o.ok?'✔️':'✖️'} <b>${LETRAS[pi]}) ${o.t}</b>${r===o.k?' <i>(sua resposta)</i>':''}<br><span>${o.w}</span></div>`; });
+    if(q.d) h += `<div class="sub">💡 <b>Dica:</b> ${q.d}</div>`;
+    h += `</div>`;
+  });
+  h += `<p style="text-align:center"><a class="btn azul" href="gabarito.html" target="_blank" style="text-decoration:none;display:inline-block">📄 Abrir o gabarito para imprimir</a></p>`;
+  box.innerHTML = h + '</div>';
+}
+
+// ---------- PAINEL / RELATÓRIO / EXPORTAR ----------
+function atualizarPainel(){
+  const datas = ['leitura','mapa','vf','resumo','simulado'].map(n=>S[n]&&S[n].salvoEm).filter(Boolean).sort();
+  const el = $('painelSalvar'); if(el) el.textContent = datas.length ? `Progresso salvo neste aparelho. Último salvamento: ${dataBR(datas[datas.length-1])}` : 'Seu progresso é salvo sozinho neste aparelho.';
+}
+function abrirRelatorio(){
+  const cod = $('codPais').value.trim().toUpperCase(); const area = $('areaPais');
+  const ehPais = cod===CODIGO_PAIS; const ehSim = S.simulado.codigo && cod===S.simulado.codigo;
+  if(!ehPais && !ehSim){ area.innerHTML = '<p class="fb no">Código não reconhecido. Use o código do Simulado (SIM-…) ou o código da família.</p>'; return; }
+  const resp = Object.values(S.leitura.resp); const lAc = resp.filter(r=>r.ok).length;
+  const errLeit = []; BLOCOS.forEach(b=>b.qs.forEach((q,qi)=>{ const r=S.leitura.resp[b.id+'_'+qi]; if(r && !r.ok) errLeit.push(b.titulo+' – '+q.q.replace(/<svg[\s\S]*?<\/svg>/g,'')); }));
+  const pecasPrim = PECAS.filter(p=>S.mapa.pecas[p.id] && S.mapa.pecas[p.id].feita && S.mapa.pecas[p.id].deprimeira).length;
+  const errSim = S.simulado.enviado ? SIM.map((q,qi)=>q.o[S.simulado.resp[qi]].length===3?null:qi+1).filter(Boolean) : [];
+  let h = `<table class="rel"><tr><th>Material</th><th>Resultado</th></tr>
+   <tr><td>📖 Leitura Guiada</td><td>${resp.length} de ${TOTAL_PERG} respondidas · ${lAc} acertos de primeira${errLeit.length?'<br><span class="sub">Errou: '+errLeit.join('; ')+'</span>':''}</td></tr>
+   <tr><td>🧠 Mapa Mental</td><td>${pecasFeitas()} de ${TOTAL_PECAS} peças encaixadas · <b>Mapa Mental: ${pecasPrim} de ${TOTAL_PECAS} peças encaixadas de primeira</b></td></tr>
+   <tr><td>✅ Verdadeiro ou Falso</td><td>${S.vf.melhor!==null?'Melhor placar: '+S.vf.melhor+'% · rodadas: '+S.vf.rodadas:'Ainda não jogou'}</td></tr>
+   <tr><td>🗺️ Resumo</td><td>Rolagem máxima: ${S.resumo.maxRolagem||0}% · ${S.resumo.concluido?'marcou "li até o fim"':'não marcou "li até o fim"'}</td></tr>
+   <tr><td>📝 Simulado</td><td>${S.simulado.enviado?`${S.simulado.acertos} de ${SIM.length} (${Math.round(S.simulado.acertos/SIM.length*100)}%) · código ${S.simulado.codigo}${errSim.length?'<br><span class="sub">Errou as questões: '+errSim.join(', ')+'</span>':''}`:'Ainda não enviado'}</td></tr>
+   <tr><td>🛤️ Trilha</td><td>${ETAPAS.map(e=>`${e.ic} ${e.nome}: ${feito(e.id)?'✅ concluída em '+dataBR(S[e.id].concluidoEm):'⏳ não concluída'}`).join('<br>')}
+     <br>${S.trilha.liberadoPelosPais?'🔓 Trilha liberada pelos pais em '+dataBR(S.trilha.liberadoEm):'🔒 Trilha não liberada pelos pais'}
+     ${S.trilha.historico.length?'<br><span class="sub">Histórico: '+S.trilha.historico.map(x=>x.acao+' em '+dataBR(x.em)).join('; ')+'</span>':''}</td></tr></table>`;
+  if(ehPais){
+    h += S.trilha.liberadoPelosPais
+      ? `<p class="caixa">🔓 <b>Trilha liberada pelos pais</b></p><button class="btn claro" id="btTrancar">🔒 Trancar de novo</button>`
+      : `<button class="btn azul" id="btLiberar">🔓 Liberar todos os materiais</button>`;
+  }
+  h += `<p><a href="gabarito.html" target="_blank">📄 Gabarito comentado do Simulado (arquivo separado)</a></p>`;
+  area.innerHTML = h;
+  if($('btLiberar')) $('btLiberar').onclick = ()=>{ S.trilha.liberadoPelosPais=true; S.trilha.liberadoEm=new Date().toISOString(); S.trilha.historico.push({acao:'liberou', em:S.trilha.liberadoEm}); gravar(K.trilha,S.trilha); renderTrilha(); abrirRelatorio(); };
+  if($('btTrancar')) $('btTrancar').onclick = ()=>{ S.trilha.liberadoPelosPais=false; S.trilha.historico.push({acao:'trancou de novo', em:new Date().toISOString()}); gravar(K.trilha,S.trilha); renderTrilha(); abrirRelatorio(); };
+}
+function exportar(){
+  const dados = {kit:SLUG, titulo:'Museu das Engenhocas — História 3º ano', exportadoEm:new Date().toISOString(), leitura:S.leitura, mapa:S.mapa, vf:S.vf, resumo:S.resumo, simulado:S.simulado, trilha:S.trilha};
+  const blob = new Blob([JSON.stringify(dados,null,2)], {type:'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'progresso_museu_das_engenhocas.json'; document.body.appendChild(a); a.click(); a.remove();
+}
+function importar(arq){
+  const fr = new FileReader();
+  fr.onload = ()=>{ try{ const d = JSON.parse(fr.result); if(d.kit!==SLUG) throw 0;
+      ['leitura','mapa','vf','resumo','simulado','trilha'].forEach(n=>{ if(d[n]) gravar(K[n], d[n]); });
+      carregar(); renderTudo(); abrirModal('<h2>📤 Progresso importado!</h2>');
+    }catch(e){ abrirModal('<h2>Arquivo não reconhecido</h2><p>Escolha o arquivo exportado deste kit.</p>'); } };
+  fr.readAsText(arq);
+}
+function zerarTudo(){
+  abrirModal('<h2>🗑️ Zerar tudo?</h2><p>Todo o progresso deste kit será apagado neste aparelho.</p>', [{t:'Sim, zerar', cls:'btn loco', fn:()=>{ Object.values(K).forEach(apagar); carregar(); rodada=null; renderTudo(); ir('inicio'); }},{t:'Cancelar', cls:'btn claro'}]);
+}
+
+function renderTudo(){ renderLeitura(); renderMapa(); renderVF(); renderResumo(); renderSimulado(); atualizarPainel(); renderTrilha(); }
+function iniciar(){
+  carregar(); renderTudo();
+  $('btExportar').onclick = exportar; $('btImportar').onclick = ()=>$('arqImportar').click();
+  $('arqImportar').onchange = e=>{ if(e.target.files[0]) importar(e.target.files[0]); e.target.value=''; };
+  $('btZerar').onclick = zerarTudo; $('btRelatorio').onclick = abrirRelatorio;
+  $('codPais').addEventListener('keydown', e=>{ if(e.key==='Enter') abrirRelatorio(); });
+  $('btLiResumo').onclick = liResumo; $('btEnviarSim').onclick = enviarSim;
+  window.addEventListener('scroll', ()=>{ if(abaAtual==='resumo') medirRolagem(); }, {passive:true});
+  window.addEventListener('hashchange', ()=>{ const h = location.hash.replace('#',''); if(h) ir(h); });
+  const h0 = location.hash.replace('#',''); ir(h0 || 'inicio');
+}
+iniciar();
+</script>
+</body>
+</html>
